@@ -7,7 +7,7 @@ module.exports = function (sequelize, Sequelize) {
             primaryKey: true,
             type: Sequelize.INTEGER
         },
-        external_medico: {
+        external_medico: { //revisar esto referecncia
             type: Sequelize.UUID
         },
         especialidad: {
