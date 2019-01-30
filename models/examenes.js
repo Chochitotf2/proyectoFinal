@@ -19,12 +19,12 @@ module.exports = function (sequelize, Sequelize) {
         updatedAt: 'fecha_modificacion'
     });
     
-    /* 
+     
     Examen.belongsTo(Consulta_medica, {
-        foreignKey: 'id_persona',
+        foreignKey: 'id_consulta_medica',
         constraints: false
     });
-*/    
+    
     return Examen;
 };
 
