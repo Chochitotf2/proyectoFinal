@@ -59,6 +59,9 @@ module.exports = function (sequelize, Sequelize) {
         models.persona.hasOne(models.cuenta, {
             foreignKey: 'id_persona'
         });
+        models.persona.hasOne(models.historial, {
+            foreignKey: 'id_persona'
+        });
         models.persona.hasMany(models.cita, {
             foreignKey: 'id_persona'
         });
