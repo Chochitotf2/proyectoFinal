@@ -11,7 +11,7 @@ module.exports = function (sequelize, Sequelize) {
             type: Sequelize.UUID
         },
         hora: {
-            type: Sequelize.DATE 
+            type: Sequelize.TIME 
         },
         estado: {
             type: Sequelize.BOOLEAN,

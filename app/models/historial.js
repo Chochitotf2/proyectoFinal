@@ -36,7 +36,8 @@ module.exports = function (sequelize, Sequelize) {
             type: Sequelize.STRING(100)
         },
         deporte: {
-            type: Sequelize.STRING(100)
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         },
         external_id: {
             type: Sequelize.UUID
