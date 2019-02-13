@@ -10,6 +10,9 @@ module.exports = function (sequelize, Sequelize) {
         external_medico: { //revisar esto referecncia
             type: Sequelize.UUID
         },
+        fecha: {
+            type: Sequelize.DATE 
+        },
         hora: {
             type: Sequelize.TIME 
         },
