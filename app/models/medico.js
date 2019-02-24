@@ -24,13 +24,7 @@ module.exports = function (sequelize, Sequelize) {
         updatedAt: 'fecha_modificacion'
     });
 
-    Medico.associate = function (models) {
-    models.horario_medico.hasOne(models.medico, {
-        foreignKey: 'id_horario_medico'
-    });
 
-
-}
 
     
     return Medico;

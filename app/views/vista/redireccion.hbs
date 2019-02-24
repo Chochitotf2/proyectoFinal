@@ -1,0 +1,27 @@
+<html>
+
+<head>
+
+<body>
+    <script type="text/javascript">
+        redireccionar();
+
+        function redireccionar() {
+            if ('{{rol}}' === 'usuario') {
+                if ('{{estado}}' == 'true') {
+                    location.href = "http://localhost:4000/usuario/home";
+                }else{
+                     location.href = "http://localhost:4000/usuario/miHistorial";
+                }
+            } else if ('{{rol}}' === 'administrador') {
+                location.href = 'http://localhost:4000/admin/controlMedicos';
+            } else {
+                location.href = 'http://localhost:4000/medico/home';
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>

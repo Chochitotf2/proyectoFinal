@@ -62,15 +62,7 @@ module.exports = function (sequelize, Sequelize) {
     });
 
 
-    Consulta_medica.associate = function (models) {
-        models.consulta_medica.hasOne(models.receta, {
-            foreignKey: 'id_consulta_medica'
-        });
-      //  models.consulta_medica.hasOne(models.examenes, {
-       //     foreignKey: 'id_consulta_medica'
-      ///  });
-    }
-
+  
 
     return Consulta_medica;
 };

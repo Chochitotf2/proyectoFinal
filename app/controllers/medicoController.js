@@ -1,93 +1,333 @@
 'use strict';
 var models = require('../models');
 var Persona = models.persona;
-var Medico   = models.medico;
+var Medico = models.medico;
 var Rol = models.rol;
 var Cuenta = models.cuenta;
 const uuidv4 = require('uuid/v4');
+
+var pdf = require('html-pdf');
+var Historial = models.historial;
+var Consulta = models.consulta_medica;
+var Cita = models.cita;
+var Receta = models.receta;
+
+var forEach = require('sync-each');
+
+var async = require("async");
+
+
+
 class MedicoController {
     verMedico(req, res) {
         res.render('/vista/medico/medicoInicio')
     }
 
-    guardar(req, res) {
-        Rol.findOne({
-            where: {nombre: 'medico'}
-        }).then(function (rol) {
-            if (rol) {
-                var dataPersona =
-                        {
-                            nombre: req.body.nombre,
-                            apellido: req.body.apellido,
-                            cedula: req.body.cedula,
-                            correo: req.body.correo,
-                            direccion: req.body.direccion,
-                            genero: req.body.genero,
-                            telefono: req.body.telefono,
-                            edad: req.body.edad,
-                            estado_civil: req.body.estadoCivil,
-                            nacionalidad: req.body.nacionalidad,
-                            external_id: uuidv4(),
-                            id_rol: rol.id
-                        };
-                Persona.create(dataPersona).then(function (newPersona, created) {
-                    if (!newPersona) {
 
-                        return done(null, false);
-                    }
-                    if (newPersona) {
-                        console.log("Se ha creado la persona: " + newPersona.id);
-                        var dataCuenta = {
-                            correo: req.body.correo,
-                            clave: req.body.clave,
-                            id_persona: newPersona.id,
-                            external_id: uuidv4()
-                        };
-                        var dataMedico = {
-                            id : persona.id,
-                            especialidad: req.body.especialidad,
-                            max_turnos: req.body.maximo,
-                            nro_consultorio: req.body.nroConsultorio,
-                        };
-                        Cuenta.create(dataCuenta).then(function (newCuenta, created) {
-                            if (newCuenta) {
-                                console.log("Se ha creado la cuenta: " + newCuenta.id);
-                                return done(null, newCuenta);
-                            }
-                            if (!newCuenta) {
-                                console.log("cuenta no se pudo crear");
-                                return done(null, false);
-                            }
 
+    listarMedicos(req, res) {
+
+
+        Medico.findAll().then(function (medico) {
+            res.send(medico);
+
+        }).catch(function (err) {
+            console.log("Error:", err);
+
+        });
+
+    }
+
+    listarMedicoPersona(req, res) {
+
+        var lista = [];
+        Persona.findAll({
+            where: { id_rol: 3 }, include: [
+                { model: models.medico, where: { id: req.user.id } }]
+        }).then(function (medicoPersona) {
+            Medico.findAll({}).then(function (medico) {
+                lista.push(medicoPersona);
+                lista.push(medico);
+                console.log(medicoPersona);
+                res.status(200).json(medicoPersona);
+
+            }).catch(function (err) {
+                console.log("Error:", err);
+
+            });
+
+        }).catch(function (err) {
+            console.log("Error:", err);
+
+        });
+
+    }
+
+    verEditar(req, res) {
+
+        var lista = [];
+        Persona.findOne({ where: { external_id: req.user.id_persona }, include: { model: models.cuenta } }).then(function (medicoPersona) {
+            Medico.findOne({ where: { id: req.user.id } }).then(function (medico) {
+
+                lista.push(medicoPersona);
+                lista.push(medico);
+                res.send({ lista: lista });
+                console.log({ lista: lista });
+
+
+            }).catch(function (err) {
+                console.log("Error:", err);
+
+            });
+
+
+        }).catch(function (err) {
+            console.log("Error:", err);
+            res.redirect('/medico/home');
+        });
+
+
+    }
+
+
+    verEditarMedico(req, res) {
+
+        var lista = [];
+        Persona.findOne({ where: { external_id: req.user.id_persona }, include: { model: models.cuenta } }).then(function (medicoPersona) {
+            Medico.findOne({ where: { id: req.user.id } }).then(function (medico) {
+
+                lista.push(medicoPersona);
+                lista.push(medico);
+                res.render('vista/medico/perfilMedico', { lista: lista });
+                console.log({ lista: lista });
+
+
+            }).catch(function (err) {
+                console.log("Error:", err);
+
+            });
+
+
+        }).catch(function (err) {
+            console.log("Error:", err);
+            res.redirect('/medico/home');
+        });
+
+
+    }
+
+    darBaja(req, res) {
+        var external = req.params.external;
+        Cuenta.update({
+            estado: false
+        }, { where: { external_id: external } }).then(function (updatedCuenta, created) {
+            if (updatedCuenta) {
+                req.flash('info', 'Se ha dado de baja correctamente', false);
+                res.redirect('/admin/controlMedicos');
+            }
+        });
+    }
+
+
+    darBajaUser(req, res) {
+        var external = req.params.external;
+        Cuenta.update({
+            estado: false
+        }, { where: { external_id: external } }).then(function (updatedCuenta, created) {
+            if (updatedCuenta) {
+                req.flash('info', 'Se ha dado de baja correctamente', false);
+                res.redirect('/admin/controlUsuarios');
+            }
+        });
+    }
+
+
+    misCitasMedico(req, res) {//id del medico cuabndo inicie session
+        Cita.findAll({ where: { external_medico: req.user.id }, include: { model: models.persona }, order: [["fecha", "ASC"]] }).then(function (citas) {
+            if (citas) {
+                res.status(200).json(citas);
+            }
+        });
+    }
+    verRegistroParaMedicos(req, res) {
+        var lista = [];
+        Persona.findAll({ where: { id_rol: 3 }, include: { model: models.rol } }).then(function (medicos) {
+            if (medicos) {//id_persona id de la persona que inicio sesion
+                Cita.findAll({ where: { external_medico: req.user.id }, include: { model: models.persona } }).then(function (citas) {
+                    if (citas) {
+                        Persona.findAll({ where: { id_rol: 1 }, include: { model: models.rol } }).then(function (usuario) {
+                            if (usuario) {
+                                res.render('vista/medico/controlCitas',
+                                    {
+                                        title: 'AdminX',
+                                        citasMedicas: citas,
+                                        listaP: usuario,
+                                        lista: medicos
+                                    });
+                            }
                         });
-                        Medico.create(dataMedico).then(function (newMedico, created) {
-                            if (newMedico) {
-                                console.log("Se ha creado la cuenta: " + newMedico.id);
-                                return done(null, newMedico);
-                            }
-                            if (!newMedico) {
-                                console.log("cuenta no se pudo crear");
-                                return done(null, false);
-                            }
+                        //  lista.push(item.external_medico);
 
-                        });
                     }
                 });
-            } else {
-                return done(null, false, {
-                    message: 'El rol no existe'
+            }
+        });
+    }
+    agendarCitaMedico(req, res) {
+
+        if (req.body.external_verificar == 'guarda') {
+            Cita.create({
+                external_medico: req.body.medico,
+                hora: req.body.hora,
+                fecha: req.body.fecha,
+                estado: true,
+                external_horario: 'ninguno',
+                external_id: uuidv4(),
+                id_persona: req.body.usuario  //id_persona id del la persona que agenda la cita
+
+            }).then(function (newHistorial, created) {
+                if (newHistorial) {
+                    console.log('se ah registrado una cita');
+                    // req.flash('info', 'Se ha creado correctamente');
+                    res.redirect('/medico/controlCitas');
+
+                }
+            });
+
+        } else {
+            Cita.update({
+                hora: req.body.hora,
+                fecha: req.body.fecha
+            }, { where: { external_id: req.body.external_modificar } }).then(function (updatedVino, created) {
+                if (updatedVino) {
+                    // req.flash('info', 'Se ha creado correctamente', false);
+                    res.redirect('/medico/controlCitas');
+                }
+            });
+        }
+
+    }
+
+
+
+
+
+    guardarConsultaMedica(req, res) {
+        Persona.findOne({ where: { id: req.body.personaAte }, include: { model: models.historial } }).then(function (medicos) {
+            if (medicos) {
+
+                if (req.body.laboratorio == undefined || req.body.laboratorio == "") {
+                    var laboratorio = 'Sin examenes de Laboratorio ';
+                } else {
+                    var laboratorio = req.body.laboratorio;
+                }
+                if (req.body.fisico == undefined || req.body.fisico == "") {
+                    var fisico = 'No fue Necesario Examenes '
+                } else {
+                    var fisico = req.body.fisico;
+                }
+
+                if (req.body.medicamento == undefined || req.body.medicamento == "") {
+                    Consulta.create({
+                        fecha: new Date(),
+                        motivo: req.body.motivo,
+                        diagnostico: req.body.diagnostico,
+                        especialidad: req.body.espec,
+                        tipo_atencion: null,
+                        descripcion: null,
+                        examenes: laboratorio,
+                        recomendaciones: req.body.recomendacion,
+                        examen_fisico: fisico,
+                        peso: req.body.peso,
+                        talla: null,
+                        estatura: req.body.estatura,
+                        external_medico: req.user.id, //id sacado de la session
+                        external_id: uuidv4(),
+                        id_historial: medicos.historial.id
+
+                    }).then(function (newHistorial, created) {
+                        if (newHistorial) {
+                            // res.send(newHistorial);
+                            res.redirect('/medico/nuevaConsulta');
+
+                        }
+                    });
+
+                } else {
+
+
+
+                    Consulta.create({
+                        fecha: new Date(),
+                        motivo: req.body.motivo,
+                        diagnostico: req.body.diagnostico,
+                        especialidad: req.body.espec,
+                        tipo_atencion: null,
+                        descripcion: null,
+                        examenes: laboratorio,
+                        recomendaciones: req.body.recomendacion,
+                        examen_fisico: fisico,
+                        peso: req.body.peso,
+                        talla: null,
+                        estatura: req.body.estatura,
+                        external_medico: req.user.id, //id sacado de la session
+                        external_id: uuidv4(),
+                        id_historial: medicos.historial.id
+
+                    }).then(function (newHistorial, created) {
+                        if (newHistorial) {
+
+                            Receta.create({
+                                medicamento: req.body.medicamento,
+                                duracion_tratamiento: req.body.duracion,
+                                fecha_Emision: new Date(),
+                                via_administracion: req.body.administracion,
+                                plan_de_tratamiento: req.body.tratamiento,
+                                objetivo_tratamiento: req.body.objetivo_tratamiento,
+                                external_id: uuidv4(),
+                                id_consulta_medica: newHistorial.id
+                            }).then(function (sec, created) {
+                                if (sec) {
+                                    res.redirect('/medico/nuevaConsulta');
+
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+
+    pantallaNuevaConsulta(req, res) {
+
+        Persona.findAll({ where: { id_rol: 1, estado_historial: true }, include: { model: models.rol } }).then(function (medicos) {
+            if (medicos) {
+
+                Medico.findOne({ where: { id: 2 } }).then(function (medico) {
+                    if (medico) {//id_persona id de la persona que inicio sesion
+                        res.render('vista/medico/nuevaConsulta',
+                            {
+                                title: 'AdminX',
+                                medico: medico,
+                                listaPersonas: medicos
+                            });
+                    }
                 });
             }
         });
     }
 
-   
+    historialPaciente(req, res) {
 
-   
+        Persona.findAll({ where: { id_rol: 1 }, include: { model: models.rol } }).then(function (usuario) {
+            if (usuario) {
+                res.render('vista/medico/historialPaciente', { title: 'AdminX', listaPersonas: usuario });
+            }
+        });
 
-  
-
-
+    }
 
 }
 module.exports = MedicoController;

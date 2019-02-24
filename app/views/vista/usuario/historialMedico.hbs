@@ -11,7 +11,72 @@
     <link rel="stylesheet" type="text/css" href="/cssI/src/select2.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/cssI/src/skin-blue.css" media="screen" />
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <script src="/cssI/src/Chart.js"></script>
+    <script>
+        var html = "";
+        $(document).ready(function () {
+            var url = "http://localhost:4000/usuario/misConsultas/";
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data, textStatus, jqXHR) {
+
+                    $.each(data, function (i, element) {
+                        //  console.log("holasss "+element);
+                        
+                        misCitas(element);
+                    });
+
+                }, error: function (jqXHR, textStatus, errorThrown) {
+                }
+            });
+        });
+
+
+        function misCitas(medico) {
+            var url = "http://localhost:4000/usuario/tablaCitas/" + medico.external_medico;
+            $.ajax({
+                url: url,
+                type: 'GET',
+                async: true,
+                dataType: 'json',
+                success: function (data, textStatus, jqXHR) {
+                  
+                    var datec = new Date(medico.fecha);
+                    var hh = datec.getUTCHours();
+                    var mm = datec.getUTCMinutes();
+                    if (hh < 10) { hh = "0" + hh; }
+                    if (mm < 10) {
+                        mm = "0" + mm;
+                     
+                    }
+
+                    var fecha = new Date(medico.fecha);
+
+                    let str = medico.fecha;
+                    let date = moment(str);
+                    html += '<tr>';
+                    html += '<td>' + date.format('MMM Do YY') + '</td>';
+                    html += '<td>' + hh + ":" + mm  + '</td>';
+                    html += '<td>' + data[0].nombre + ' ' + data[0].apellido + '</td>';
+                    html += '<td>' + 'Consultorio Nro ' + data[1].nro_consultorio + '</td>';
+                    html += '<td>' + data[1].especialidad + '</td>';
+                    html += '<td> ' + ' <button onclick="myFunction(' + "'" + medico.external_id + "'" + ')" id=' + medico.external_id + '_a' + '   data-target=".bd-example-modal-lg"  type="button" class="btn btn-sm btn-success">Consulta</button>';
+                    $("#tabla tbody").html(html);
+
+                }, error: function (jqXHR, textStatus, errorThrown) {
+                }
+            });
+        }
+
+    </script>
+
+
+
 </head>
 
 <body>
@@ -85,7 +150,7 @@
                             <i data-feather="user"></i>
                         </span>
                         <span class="sidebar-nav-name">
-                           Perfil Usuario
+                            Perfil Usuario
                         </span>
 
                     </a>
@@ -105,9 +170,9 @@
         </div>
 
         <!-------------------------MAIN------------------------------>
-       
+
         <!-- Main Content -->
-        <div class="adminx-content" >
+        <div class="adminx-content">
 
             <div class="adminx-main-content">
                 <div class="container-fluid">
@@ -160,38 +225,39 @@
 
                                     <div class="box-body">
 
-                                        <table class="table no-margin">
+                                        <table id="tabla" class="table no-margin">
                                             <thead class="text-center">
                                                 <tr>
                                                 <tr class="info">
-                                                    <td>Nombre</th>
-                                                    <td>Cedula</th>
-                                                    <td>Cuenta</th>
-                                                    <td>Estado</th>
+                                                    <td>Fecha</th>
+                                                    <td>Hora</th>
+                                                    <td>Doctor</th>
+                                                    <td>Consultorio</th>
+                                                    <td>Especialidad</th>
                                                     <td>Acciones</th>
 
                                                 </tr>
                                                 </tr>
                                             </thead>
                                             <tbody class="text-center">
-                                                <tr></tr>
-                                                <td>Armando</td>
-                                                <td>1150070876</td>
-                                                <td>joluauvi100@gmail.com</td>
-                                                <td><span class="badge badge-danger">activo</span></td>
-                                                <td>
-                                                    <!-------------------------BOTONES----------------------------->
 
-                                                    <button type="button"
-                                                       class="btn btn-sm btn-outline-secondary">Historial</button>
-                                                    <div class="btn-group">
 
-                                                      
-                                                    </div>
-                                                </td>
-                                                <!-------------------------FIN BOTONES----------------------------->
-                                                </tr>
                                             </tbody>
+                                            <script>
+                                                function myFunction(data) {
+                                                    var url = "http://localhost:4000/crearpdf/" + data;
+                                                    $.ajax({
+                                                        url: url,
+                                                        type: 'GET',
+                                                        dataType: 'json',
+                                                        success: function (data, textStatus, jqXHR) {
+                                                            window.open('/carga', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');
+                                                        }, error: function (jqXHR, textStatus, errorThrown) {
+                                                        }
+                                                    });
+                                                }
+
+                                            </script>
                                         </table>
                                         <div class="box-footer clearfix">
 
