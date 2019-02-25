@@ -12,51 +12,52 @@
     <link rel="stylesheet" type="text/css" href="/cssI/src/main.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/cssI/src/select2.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/cssI/src/skin-blue.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/cssI/src/screen.css" media="screen" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
     <script>
- 
- 
 
-    function listarUsuarios() {
-        var url = 'http://localhost:4000/admin/controlMedico/medicoPersona';
-        $.ajax({
-            url: url,
-            type: 'GET',
-            dataType: 'json',
-            success: function (data, textStatus, jqXHR) {  
-                var html = "";
-            console.log(data);
-                $.each(data[0], function(i,item){
-                    html += '<tr>';
-                    html += '<td>'+ data[1][i].nro_consultorio +'</td>';
-                    html += '<td>'+item.nombre +'</td>';
-                    html += '<td>'+item.cuentum.correo+'</td>';
-                    html += '<td>'+data[1][i].especialidad+'</td>';
-                    html += '<td>'+item.cuentum.estado+'</td>';
-                    html += '<td>'+'<a  class="btn btn-sm btn-danger "  href="/admin/darDeBaja/'+item.cuentum.external_id+'"> Activar/Desactivar</a></td>';
-                    html += '</tr>';
-                       
-                });
-                $("#tabla tbody").html(html);
-            }, error: function (jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR);
-            }
+
+
+        function listarUsuarios() {
+            var url = 'http://localhost:4000/admin/controlMedico/medicoPersona';
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data, textStatus, jqXHR) {
+                    var html = "";
+                    console.log(data);
+                    $.each(data[0], function (i, item) {
+                        html += '<tr>';
+                        html += '<td>' + data[1][i].nro_consultorio + '</td>';
+                        html += '<td>' + item.nombre + '</td>';
+                        html += '<td>' + item.cuentum.correo + '</td>';
+                        html += '<td>' + data[1][i].especialidad + '</td>';
+                        html += '<td>' + item.cuentum.estado + '</td>';
+                        html += '<td>' + '<a  class="btn btn-sm btn-danger "  href="/admin/darDeBaja/' + item.cuentum.external_id + '"> Activar/Desactivar</a></td>';
+                        html += '</tr>';
+
+                    });
+                    $("#tabla tbody").html(html);
+                }, error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR);
+                }
+            });
+        }
+        $(document).ready(function () {
+            listarUsuarios();
         });
-    }   
-    $(document).ready(function (){
-        listarUsuarios();
-    });
 
-  
-</script>
+
+    </script>
 
 
 
 </head>
 
 <body>
-    <div class="adminx-container " >
+    <div class="adminx-container ">
         <!-- Header -->
         <nav class="navbar navbar-expand justify-content-between fixed-top">
             <a class="navbar-brand mb-0 h1 d-none d-md-block" href="/admin/controlMedicos">
@@ -75,7 +76,7 @@
                 <!-- Notificatoins -->
 
                 <!-- Notifications -->
-     <li class="nav-item dropdown">
+                <li class="nav-item dropdown">
                     <a class="nav-link avatar-with-name" id="navbarDropdownMenuLink" data-toggle="dropdown" href="#">
                         <img src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"
                             class="d-inline-block align-top" alt="">
@@ -191,8 +192,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="text-center">
-                                            
-                                        
+
+
                                             </tbody>
                                         </table>
                                         <div class="box-footer clearfix">
@@ -223,7 +224,8 @@
 
 
                                 <div class="modal-body">
-                                    <form class="form-horizontal" method="post" id="guardarMedico" name="guardarMedico" action="/medico/guardar">
+                                    <form id="formulario" name="formulario" class="form-horizontal" method="post"
+                                        id="guardarMedico" name="guardarMedico" action="/medico/guardar">
                                         <ul class="nav nav-tabs">
                                             <li class="nav-item">
                                                 <a href="#consulta" data-toggle="tab" aria-expanded="false"
@@ -263,7 +265,7 @@
                                                                 class="form-control ui-autocomplete-input"
                                                                 placeholder="Ingrese los Apellidos del Medico"
                                                                 id="apellidoMedico" name="apellido" required="">
-                                                            
+
 
                                                         </div>
 
@@ -276,8 +278,8 @@
 
                                                         <div class="form-group">
                                                             <label for="dni" class="control-label">Cedula</label>
-                                                            <input type="text" class="form-control" id="cedulaMedico" name="cedula"
-                                                                placeholder="Ingrese la pinshe cedula prro">
+                                                            <input type="text" class="form-control" id="cedulaMedico"
+                                                                name="cedula" placeholder="Ingrese una cedula">
                                                         </div>
 
                                                     </div>
@@ -287,8 +289,8 @@
                                                                 Electronico</label>
                                                             <input type="email"
                                                                 class="form-control ui-autocomplete-input"
-                                                                placeholder="Ingrese el correo del medico" id="correoMedico"
-                                                                name="correo"  required="">
+                                                                placeholder="Ingrese el correo del medico"
+                                                                id="correoMedico" name="correo" required="">
                                                         </div>
                                                     </div>
 
@@ -300,8 +302,7 @@
                                                             <input type="text"
                                                                 class="form-control ui-autocomplete-input"
                                                                 placeholder="Ingrese la direccion del domicilio"
-                                                                id="correoMedico" name="direccion" 
-                                                                required="">
+                                                                id="direccion" name="direccion" required="">
                                                         </div>
 
                                                     </div>
@@ -349,25 +350,26 @@
                                                 </div>
                                                 <div class="row">
 
-                                                      <div class="col-md-3">
+                                                    <div class="col-md-3">
 
                                                         <div class="form-group">
                                                             <label for="especialidad"
                                                                 class="control-label">Especialidad</label>
-                                                               <input type="text" class="form-control" id="especialidad"
+                                                            <input type="text" class="form-control" id="especialidad"
                                                                 name="especialidad" placeholder="Ej . Cardiologo">
 
                                                         </div>
 
                                                     </div>
 
-                                                   
+
                                                     <div class="col-md-5">
 
                                                         <div class="form-group">
                                                             <label for="genero" class="control-label">Genero</label>
 
-                                                            <select class="form-control" id="generoMedico" name="genero">
+                                                            <select class="form-control" id="generoMedico"
+                                                                name="genero">
                                                                 <option>Genero</option>
                                                                 <option>M</option>
                                                                 <option>F</option>
@@ -391,15 +393,16 @@
 
                                                 </div>
                                                 <div class="row">
-                                                  
- 
+
+
                                                     <div class="col-md-3">
 
                                                         <div class="form-group">
                                                             <label for="consultorio" class="control-label">Numero del
                                                                 Consultorio</label>
                                                             <input type="text" class="form-control" id="consultorFio"
-                                                                name="consultorio" placeholder="Ingrese el numero de consultorio">
+                                                                name="consultorio"
+                                                                placeholder="Ingrese el numero de consultorio">
                                                         </div>
 
                                                     </div>
@@ -409,13 +412,14 @@
 
                                                     <div class="col-md-5">
                                                         <div class="form-group">
-                                                            <label for="nombre_paciente" class="control-label">Ingrese el correo de registro
+                                                            <label for="nombre_paciente" class="control-label">Ingrese
+                                                                el correo de registro
                                                             </label>
 
                                                             <input type="text"
                                                                 class="form-control ui-autocomplete-input"
                                                                 placeholder="Ingrese la cuenta " id="cuentaMedico"
-                                                                name="cuenta"  required="">
+                                                                name="cuenta" required="">
 
 
                                                         </div>
@@ -430,7 +434,7 @@
                                                             <input type="password"
                                                                 class="form-control ui-autocomplete-input"
                                                                 placeholder="Ingrese su Password" id="password"
-                                                                name="clave"  required="">
+                                                                name="clave" required="">
 
 
                                                         </div>
@@ -457,20 +461,20 @@
                                             </div>
                                         </div>
 
-                                         <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary waves-effect"
-                                        data-dismiss="modal">Cerrar</button>
-                                    <input type="hidden" name="id_consulta" id="id_consulta" value="39">
-                                    <input type="hidden" name="btn_action" id="btn_action" value="Add">
-                                    <input type="submit" name="action" id="action" class="btn btn-primary"
-                                        value="Regtrar Medico">
-                                    <br><br>
-                                </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary waves-effect"
+                                                data-dismiss="modal">Cerrar</button>
+                                            <input type="hidden" name="id_consulta" id="id_consulta" value="39">
+                                            <input type="hidden" name="btn_action" id="btn_action" value="Add">
+                                            <input type="submit" name="action" id="action" class="btn btn-primary"
+                                                value="Regtrar Medico">
+                                            <br><br>
+                                        </div>
 
-                                
+
                                     </form>
                                 </div>
-                               
+
 
                             </div>
 
@@ -495,7 +499,104 @@
                     <script src="/cssI/src/fastclick.js"></script>
                     <!-- AdminLTE App -->
                     <script src="/cssI/src/app.js"></script>
-                 
+
+                    <script src="/cssI/src/js/validator.js"></script>
+                    <script src="/cssI/src/validate.js"></script>
+                    <script src="/cssI/src/app.js"></script>
+
+                    <script>
+                        $().ready(function () {
+                            $("#formulario").validate({
+                                rules: {
+                                    nombre: {
+                                        required: true
+                                    },
+                                    apellido: {
+                                        required: true
+                                    },
+                                    cedula: {
+                                        required: true,
+                                        number: true
+                                    },
+                                    correo: {
+                                        required: true
+                                    },
+                                    direccion: {
+                                        required: true
+                                    },
+                                    telefono: {
+                                        required: true,
+                                        number: true
+                                    },
+                                    nacionalidad: {
+                                        required: true
+                                    },
+                                    estadoCivil: {
+                                        required: true
+                                    },
+                                    especialidad: {
+                                        required: true
+                                    },
+                                    edad: {
+                                        required: true
+                                    },
+                                    consultorio: {
+                                        required: true
+                                    },
+                                    cuenta: {
+                                        required: true
+                                    },
+                                    clave: {
+                                        required: true
+                                    }
+                                },
+                                messages: {
+                                    nombre: {
+                                        required: "Ingrese un nombre valido "
+                                    },
+                                    apellido: {
+                                        required: "Ingrese un apellido valido "
+                                    },
+                                    cedula: {
+                                        required: "Ingrese valores validos  "
+                                    },
+                                    correo: {
+                                        required: "Ingrese un correo valido  "
+                                    },
+                                    direccion: {
+                                        required: "Ingrese una direccion valida   "
+                                    },
+                                    telefono: {
+                                        required: "Ingrse un telefono   "
+                                    },
+                                    nacionalidad: {
+                                        required: "Ingrse la nacionalidad del medico  "
+                                    },
+                                    estadoCivil: {
+                                        required: "Ingrse el estado civil de medico "
+                                    },
+                                    especialidad: {
+                                        required: "Ingrese la especialidad del medico "
+                                    },
+                                    edad: {
+                                        required: "Ingrese la  edad del medico"
+                                    },
+                                    consultorio: {
+                                        required: "Ingrese el consultorio del medico"
+                                    },
+                                    cuenta: {
+                                        required: "Ingrese el correo para la cuenta"
+                                    },
+                                    clave: {
+                                        required: "Tiene que ingresar una clave"
+                                    }
+                                }
+                            });
+                        });
+
+                    </script>
+
+
 
 
 

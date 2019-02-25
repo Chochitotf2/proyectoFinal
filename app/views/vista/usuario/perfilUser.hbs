@@ -4,7 +4,7 @@
 <head>
     <title>Plantilla - medico</title>
     <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" type="text/css" href="/dist/css/adminx.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/cssI/src/AdminLTE.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/cssI/src/main.css" media="screen" />
@@ -35,7 +35,7 @@
                 <!-- Notificatoins -->
 
                 <!-- Notifications -->
-           <li class="nav-item dropdown">
+                <li class="nav-item dropdown">
                     <a class="nav-link avatar-with-name" id="navbarDropdownMenuLink" data-toggle="dropdown" href="#">
                         <img src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"
                             class="d-inline-block align-top" alt="">
@@ -49,7 +49,7 @@
         <!-- // Header -->
 
         <!-- expand-hover push -->
- <div class="adminx-sidebar expand-hover push" id="sidebar">
+        <div class="adminx-sidebar expand-hover push" id="sidebar">
             <ul class="sidebar-nav">
                 <li class="sidebar-nav-item">
                     <a href='/usuario/home' class="sidebar-nav-link">
@@ -126,48 +126,46 @@
                                             <div class="col-4 col-12-medium">
 
                                                 <!-- Sidebar -->
-                                            
-                                                    <section id="sidebar">
-                                                        <section>
-                                                            <h3>Imagen del perfil</h3>
 
-                                                            <div class="col-9">
-                                                                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"
-                                                                    style="border-radius: 25px">
-                                                            </div>
+                                                <section id="sidebar">
+                                                    <section>
+                                                        <h3>Imagen del perfil</h3>
 
-                                                            <input type="hidden" name="external"
-                                                                value={{lista.external_id}} />
+                                                        <div class="col-9">
+                                                            <img src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"
+                                                                style="border-radius: 25px">
+                                                        </div>
 
-                                                        </section>
-                                                        <hr />
-                                                        <section>
-                                                            <input type="hidden" name="mi_id" />
-                                                            <h3>Informacion de contacto</h3>
-                                                            <label class="form-label"
-                                                                for="exampleFormControlTextarea1">Telefono</label>
-                                                            <input class="form-control mb-2 form-control-lg" type="text"
-                                                                placeholder="........." value={{lista.telefono}}
-                                                                name="telefono">
-                                                            <label class="form-label"
-                                                                for="exampleFormControlTextarea1">Direccion</label>
-                                                            <textarea class="form-control"
-                                                                id="exampleFormControlTextarea1" rows="3"
-                                                                name="direccion">{{lista.direccion}}</textarea>
-                                                        </section>
-                                                        <hr />
-                                                        <section style="text-align: center;">
-
-                                                            <button type="submit"
-                                                                class="btn btn-pill btn-sm btn-outline-primary">Guardar</button>
-                                                            <a type="button"
-                                                                class="btn btn-pill btn-sm btn-outline-danger"
-                                                                href="/usuario/home">Cancelar</a>
-                                                            <td>
-                                                            </td>
-                                                        </section>
+                                                        <input type="hidden" name="external"
+                                                            value={{lista.external_id}} />
 
                                                     </section>
+                                                    <hr />
+                                                    <section>
+                                                        <input type="hidden" name="mi_id" />
+                                                        <h3>Informacion de contacto</h3>
+                                                        <label class="form-label"
+                                                            for="exampleFormControlTextarea1">Telefono</label>
+                                                        <input class="form-control mb-2 form-control-lg" type="text"
+                                                            placeholder="........." value={{lista.telefono}}
+                                                            name="telefono">
+                                                        <label class="form-label"
+                                                            for="exampleFormControlTextarea1">Direccion</label>
+                                                        <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                            rows="3" name="direccion">{{lista.direccion}}</textarea>
+                                                    </section>
+                                                    <hr />
+                                                    <section style="text-align: center;">
+
+                                                        <button type="submit"
+                                                            class="btn btn-pill btn-sm btn-outline-primary">Guardar</button>
+                                                        <a type="button" class="btn btn-pill btn-sm btn-outline-danger"
+                                                            href="/usuario/home">Cancelar</a>
+                                                        <td>
+                                                        </td>
+                                                    </section>
+
+                                                </section>
 
                                             </div>
                                             <div class="col-8 col-12-medium imp-medium">
@@ -272,87 +270,88 @@
     <script src="/cssI//src/app.js"></script>
 
 
-        <script src="/cssI/src/js/validator.js"></script>
-        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-        <script src="/cssI/src/validate.js"></script>
-        <script src="/cssI/src/app.js"></script>
+    <script src="/cssI/src/js/validator.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script src="/cssI/src/validate.js"></script>
+    <script src="/cssI/src/app.js"></script>
 
-        <script>
-            $().ready(function () {
-                $("#formulario").validate({
-                    rules: {
-                        nombre: {
-                            required: true
-                        },
-                        apellido: {
-                            required: true
-                        },
-                        edad: {
-                            required: true,
-                            number:true
-                        },
-                        nacionalidad: {
-                            required: true
-                        },
-                        consultorio: {
-                            required: true
-                        },
-                        especialidad: {
-                            required: true
-                        },
-                        telefono: {
-                            required: true
-                        },
-                        direccion: {
-                            required: true
-                        }
+    <script>
+        $().ready(function () {
+            $("#formulario").validate({
+                rules: {
+                    nombre: {
+                        required: true
                     },
-                    messages: {
-                        nombre: {
-                            required: "Es necesario inngresar un nombre "
-                        },
-                        apellido: {
-                            required: "Es necesario inngresar un apellido "
-                        },
-                        edad: {
-                            required: "Ingrese una edad correcta"
-                        },
-                        nacionalidad: {
-                            required: "Ingrese una nacionalidad "
-                        },
-                        consultorio: {
-                            required: "Ingrese un consultorio"
-                        },
-                        especialidad: {
-                            required: "Ingrese una especialidad "
-                        },
-                        telefono: {
-                            required: "Ingrese un telefono"
-                        },
-                        direccion: {
-                            required: "Ingrese una direccion correcta"
-                        },
-                        medicamento: {
-                            required: "Ingrese un medicamento "
-                        },
-                        duracion: {
-                            required: "Ingrese la duracion del tratamiento"
-                        },
-                        administracion: {
-                            required: "Ingrese indicaciones "
-                        },
-                        tratamiento: {
-                            required: "Ingrese indicaciones"
-                        },
-                        objetivo_tratamiento: {
-                            required: "Ingrese el objetivo del tratamiento"
-                        }
-
+                    apellido: {
+                        required: true
+                    },
+                    edad: {
+                        required: true,
+                        number: true
+                    },
+                    nacionalidad: {
+                        required: true
+                    },
+                    consultorio: {
+                        required: true
+                    },
+                    especialidad: {
+                        required: true
+                    },
+                    telefono: {
+                        required: true,
+                        number: true
+                    },
+                    direccion: {
+                        required: true
                     }
-                });
-            });
+                },
+                messages: {
+                    nombre: {
+                        required: "Es necesario inngresar un nombre "
+                    },
+                    apellido: {
+                        required: "Es necesario inngresar un apellido "
+                    },
+                    edad: {
+                        required: "Ingrese una edad correcta"
+                    },
+                    nacionalidad: {
+                        required: "Ingrese una nacionalidad "
+                    },
+                    consultorio: {
+                        required: "Ingrese un consultorio"
+                    },
+                    especialidad: {
+                        required: "Ingrese una especialidad "
+                    },
+                    telefono: {
+                        required: "Ingrese un telefono"
+                    },
+                    direccion: {
+                        required: "Ingrese una direccion correcta"
+                    },
+                    medicamento: {
+                        required: "Ingrese un medicamento "
+                    },
+                    duracion: {
+                        required: "Ingrese la duracion del tratamiento"
+                    },
+                    administracion: {
+                        required: "Ingrese indicaciones "
+                    },
+                    tratamiento: {
+                        required: "Ingrese indicaciones"
+                    },
+                    objetivo_tratamiento: {
+                        required: "Ingrese el objetivo del tratamiento"
+                    }
 
-        </script>
+                }
+            });
+        });
+
+    </script>
 
     <script>
         (function () {

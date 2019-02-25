@@ -187,19 +187,18 @@
     <fieldset>
       <h2 class="fs-title">Crea tu cuenta</h2>
       <h3 class="fs-subtitle">Datos de inicio de sesion</h3>
-      <input type="text" name="correo" placeholder="Correo" />
-      <input type="password" name="clave" placeholder="Contraseña" />
-      <input type="password" name="claveConfirmar" placeholder="Confirma tu contraseña" />
-      <input type="button" name="next" class="next action-button" value="Siguiente" />
+      <input type="text" required name="correo" placeholder="Correo" />
+      <input type="password" required name="clave" id="clave" required placeholder="Contraseña" />
+      <input type="button" required name="next" class="next action-button" value="Siguiente" />
     </fieldset>
     <fieldset>
       <h2 class="fs-title">Datos personales</h2>
       <h3 class="fs-subtitle">Informacion que requerimos para crear tu cuenta</h3>
-      <input type="text" name="nombre" placeholder="Nombres" />
-      <input type="text" name="apellido" placeholder="Apellidos" />
-      <input type="text" name="cedula" placeholder="Cedula" />
+      <input type="text" required name="nombre" placeholder="Nombres" />
+      <input type="text" required name="apellido" placeholder="Apellidos" />
+      <input type="text" required name="cedula" placeholder="Cedula" />
 
-      <select id="soflow" name="genero" class="mdb-select md-form col-md-12">
+      <select id="soflow" required name="genero" class="mdb-select md-form col-md-12">
         <option value="">Genero</option>
         <option value="M">Masculino</option>
         <option value="F">Femenino</option>
@@ -207,23 +206,63 @@
 
 
 
-      <input type="text" name="edad" placeholder="Edad" />
-      <input type="text" name="estadoCivil" placeholder="Estado Civil" />
-      <input type="text" name="nacionalidad" placeholder="Nacionalidad" />
+      <input type="text" required name="edad" placeholder="Edad" />
+      <input type="text" required name="estadoCivil" placeholder="Estado Civil" />
+      <input type="text" required name="nacionalidad" placeholder="Nacionalidad" />
 
       <input type="button" name="previous" class="previous action-button" value="Regresar" />
-      <input type="button" name="next" class="next action-button" value="Siguiente" />
+      <input type="button"  name="next" class="next action-button" value="Siguiente" />
     </fieldset>
     <fieldset>
       <h2 class="fs-title">Informacion de contacto</h2>
       <h3 class="fs-subtitle">Datos requeridos para contactarnos con usted</h3>
 
-      <input type="text" name="telefono" placeholder="Telefono" />
-      <textarea name="direccion" placeholder="Direccion"></textarea>
+      <input type="hidden" disabled placeholder="Receurde llenar todos los campos " >
+      <input type="number" required name="telefono" placeholder="Telefono" />
+      <textarea name="direccion" required placeholder="Direccion"></textarea>
       <input type="button" name="previous" class="previous action-button" value="Regresar" />
-      <button type="submit" name="submit" class="submit action-button">Regitrarme </button>
+      <button type="submit" onclick="return campos()" name="submit" class="submit action-button">Regitrarme </button>
     </fieldset>
   </form>
+  <script>
+    function campos() {
+       document.getElementById("medico").disabled = false;
+    }
+  </script>
+
+  <script src="/cssI/src/js/validator.js"></script>
+  <script src="/cssI/src/validate.js"></script>
+  <script src="/cssI/src/app.js"></script>
+
+  <script>
+    $().ready(function () {
+      $("#msform").validate({
+        rules: {
+          correo: {
+            required: true
+          },
+          usaurio: {
+            required: true
+          },
+          medico: {
+            required: true
+          }
+        },
+        messages: {
+          correo: {
+            required: "Seleccione una fecha"
+          },
+          usuario: {
+            required: "Es necesario selecciona un usuario"
+          },
+          medico: {
+            required: "Es necesario elegir un medico"
+          }
+        }
+      });
+    });
+
+  </script>
 
 
 </body>

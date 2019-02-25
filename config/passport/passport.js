@@ -46,73 +46,87 @@ module.exports = function (passport, cuenta, persona, rol) {
                 return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
             };
             //verificar si el email no esta registrado
-            Cuenta.findOne({
-                where: {
-                    correo: email
-                }
-            }).then(function (cuenta) {
-                if (cuenta) {
+            Persona.findOne({where: { cedula: req.body.cedula }
+            }).then(function (cuenta1) {
+               if(cuenta1){
+                   return done(null, false, {
+                       message: req.flash('correo_repetido', 'Cedula ya registrada')
+                   });
+               }else{
+                Cuenta.findOne({
+                    where: {
+                        correo: email
+                    }
+                }).then(function (cuenta) {
+                    if (cuenta) {
+                        return done(null, false, {
+                            message: req.flash('correo_repetido', 'El correo ya esta regisrado')
+                        });
+    
+                    } else {
+                        var userPassword = generateHash(password);
+                        Rol.findOne({
+                            where: { nombre: 'usuario' }
+                        }).then(function (rol) {
+                            if (rol) {
+                                var dataPersona =
+                                {
+                                    nombre: req.body.nombre,
+                                    apellido: req.body.apellido,
+                                    cedula: req.body.cedula,
+                                    correo: req.body.correo,
+                                    direccion: req.body.direccion,
+                                    genero: req.body.genero,
+                                    telefono: req.body.telefono,
+                                    edad: req.body.edad,
+                                    estado_civil: req.body.estadoCivil,
+                                    nacionalidad: req.body.nacionalidad,
+                                    external_id: uuidv4(),
+                                    id_rol: rol.id
+                                };
+                                Persona.create(dataPersona).then(function (newPersona, created) {
+                                    if (!newPersona) {
+    
+                                        return done(null, false);
+                                    }
+                                    if (newPersona) {
+                                        console.log("Se ha creado la persona: " + newPersona.id);
+                                        var dataCuenta = {
+                                            correo: email,
+                                            clave: userPassword,
+                                            id_persona: newPersona.id,
+                                            external_id: uuidv4()
+                                        };
+                                        Cuenta.create(dataCuenta).then(function (newCuenta, created) {
+                                            if (newCuenta) {
+                                                console.log("Se ha creado la cuenta: " + newCuenta.id);
+                                                return done(null, newCuenta);
+                                            }
+                                            if (!newCuenta) {
+                                                console.log("cuenta no se pudo crear");
+                                                return done(null, false);
+                                            }
+    
+                                        });
+                                    }
+                                });
+                            } else {
+                                return done(null, false, {
+                                    message: 'El rol no existe'
+                                });
+                            }
+                        });
+    
+                    }
+                });
 
-                    return done(null, false, {
-                        message: req.flash('correo_repetido', 'El correo ya esta regisrado')
-                    });
 
-                } else {
-                    var userPassword = generateHash(password);
-                    Rol.findOne({
-                        where: { nombre: 'usuario' }
-                    }).then(function (rol) {
-                        if (rol) {
-                            var dataPersona =
-                            {
-                                nombre: req.body.nombre,
-                                apellido: req.body.apellido,
-                                cedula: req.body.cedula,
-                                correo: req.body.correo,
-                                direccion: req.body.direccion,
-                                genero: req.body.genero,
-                                telefono: req.body.telefono,
-                                edad: req.body.edad,
-                                estado_civil: req.body.estadoCivil,
-                                nacionalidad: req.body.nacionalidad,
-                                external_id: uuidv4(),
-                                id_rol: rol.id
-                            };
-                            Persona.create(dataPersona).then(function (newPersona, created) {
-                                if (!newPersona) {
+               }
+           });
 
-                                    return done(null, false);
-                                }
-                                if (newPersona) {
-                                    console.log("Se ha creado la persona: " + newPersona.id);
-                                    var dataCuenta = {
-                                        correo: email,
-                                        clave: userPassword,
-                                        id_persona: newPersona.id,
-                                        external_id: uuidv4()
-                                    };
-                                    Cuenta.create(dataCuenta).then(function (newCuenta, created) {
-                                        if (newCuenta) {
-                                            console.log("Se ha creado la cuenta: " + newCuenta.id);
-                                            return done(null, newCuenta);
-                                        }
-                                        if (!newCuenta) {
-                                            console.log("cuenta no se pudo crear");
-                                            return done(null, false);
-                                        }
 
-                                    });
-                                }
-                            });
-                        } else {
-                            return done(null, false, {
-                                message: 'El rol no existe'
-                            });
-                        }
-                    });
 
-                }
-            });
+         
         }
     ));
 
@@ -129,90 +143,103 @@ module.exports = function (passport, cuenta, persona, rol) {
                 return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
             };
             //verificar si el email no esta registrado
-            Cuenta.findOne({
-                where: {
-                    correo: email
-                }
-            }).then(function (cuenta) {
-                if (cuenta) {
+            Persona.findOne({where: { cedula: req.body.cedula }
+            }).then(function (cuenta1) {
+               if(cuenta1){
+                   return done(null, false, {
+                       message: req.flash('correo_repetido', 'Cedula ya registrada')
+                   });
+               }else{
+                Cuenta.findOne({
+                    where: {
+                        correo: email
+                    }
+                }).then(function (cuenta) {
+                    if (cuenta) {
+    
+                        return done(null, false, {
+                            message: req.flash('correo_repetido', 'El correo ya esta regisrado')
+                        });
+    
+                    } else {
+                        var userPassword = generateHash(password);
+                        Rol.findOne({
+                            where: { nombre: 'medico' }
+                        }).then(function (rol) {
+                            if (rol) {
+                                var dataPersona =
+                                {
+                                    nombre: req.body.nombre,
+                                    apellido: req.body.apellido,
+                                    cedula: req.body.cedula,
+                                    correo: req.body.correo,
+                                    direccion: req.body.direccion,
+                                    genero: req.body.genero,
+                                    telefono: req.body.telefono,
+                                    edad: req.body.edad,
+                                    estado_civil: req.body.estadoCivil,
+                                    nacionalidad: req.body.nacionalidad,
+                                    external_id: uuidv4(),
+                                    id_rol: rol.id
+                                };
+                                Persona.create(dataPersona).then(function (newPersona, created) {
+                                    if (!newPersona) {
+    
+                                        return done(null, false);
+                                    }
+                                    if (newPersona) {
+                                        console.log("Se ha creado la persona: " + newPersona.id);
+                                        var dataCuenta = {
+                                            correo: email,
+                                            clave: userPassword,
+                                            id_persona: newPersona.id,
+                                            external_id: uuidv4()
+                                        };
+                                        var dataMedico = {
+                                            id: newPersona.id,
+                                            especialidad: req.body.especialidad,
+                                            nro_consultorio: req.body.consultorio
+                                        };
+                                        Cuenta.create(dataCuenta).then(function (newCuenta, created) {
+                                            if (newCuenta) {
+                                                console.log("Se ha creado la cuenta: " + newCuenta.id);
+                                                return done(null, newCuenta);
+                                            }
+                                            if (!newCuenta) {
+                                                console.log("cuenta no se pudo crear");
+                                                return done(null, false);
+                                            }
+    
+                                        });
+                                        Medico.create(dataMedico).then(function (newMedico, created) {
+                                            if (newMedico) {
+                                                console.log("Se ha creado el medico: " + newMedico.id);
+                                                return (newMedico);
+                                            }
+                                            if (!newMedico) {
+                                                console.log("So se pudo crear medico lol xD");
+    
+                                            }
+    
+                                        });
+    
+                                    }
+                                });
+                            } else {
+                                return done(null, false, {
+                                    message: 'El rol no existe'
+                                });
+                            }
+                        });
+    
+                    }
+                });
 
-                    return done(null, false, {
-                        message: req.flash('correo_repetido', 'El correo ya esta regisrado')
-                    });
 
-                } else {
-                    var userPassword = generateHash(password);
-                    Rol.findOne({
-                        where: { nombre: 'medico' }
-                    }).then(function (rol) {
-                        if (rol) {
-                            var dataPersona =
-                            {
-                                nombre: req.body.nombre,
-                                apellido: req.body.apellido,
-                                cedula: req.body.cedula,
-                                correo: req.body.correo,
-                                direccion: req.body.direccion,
-                                genero: req.body.genero,
-                                telefono: req.body.telefono,
-                                edad: req.body.edad,
-                                estado_civil: req.body.estadoCivil,
-                                nacionalidad: req.body.nacionalidad,
-                                external_id: uuidv4(),
-                                id_rol: rol.id
-                            };
-                            Persona.create(dataPersona).then(function (newPersona, created) {
-                                if (!newPersona) {
 
-                                    return done(null, false);
-                                }
-                                if (newPersona) {
-                                    console.log("Se ha creado la persona: " + newPersona.id);
-                                    var dataCuenta = {
-                                        correo: email,
-                                        clave: userPassword,
-                                        id_persona: newPersona.id,
-                                        external_id: uuidv4()
-                                    };
-                                    var dataMedico = {
-                                        id: newPersona.id,
-                                        especialidad: req.body.especialidad,
-                                        nro_consultorio: req.body.consultorio
-                                    };
-                                    Cuenta.create(dataCuenta).then(function (newCuenta, created) {
-                                        if (newCuenta) {
-                                            console.log("Se ha creado la cuenta: " + newCuenta.id);
-                                            return done(null, newCuenta);
-                                        }
-                                        if (!newCuenta) {
-                                            console.log("cuenta no se pudo crear");
-                                            return done(null, false);
-                                        }
-
-                                    });
-                                    Medico.create(dataMedico).then(function (newMedico, created) {
-                                        if (newMedico) {
-                                            console.log("Se ha creado el medico: " + newMedico.id);
-                                            return (newMedico);
-                                        }
-                                        if (!newMedico) {
-                                            console.log("So se pudo crear medico lol xD");
-
-                                        }
-
-                                    });
-
-                                }
-                            });
-                        } else {
-                            return done(null, false, {
-                                message: 'El rol no existe'
-                            });
-                        }
-                    });
-
-                }
+               }
             });
+          
         }
     ));
     //inicio de sesion

@@ -2,9 +2,6 @@ var express = require('express');
 var app = express.Router();
 var passport = require('passport');
 
-
-
-
 var cuenta = require('../controllers/cuentaController');
 var cuentaController = new cuenta();
 
@@ -96,8 +93,8 @@ module.exports = function (app, passport) {
         app.post('/medico/guardarEditar', userController.modificarMedic);
 
         //Vistas Admin
-        app.get('/admin/controlMedicos', authUsuario4, function (req, res, next) { res.render('vista/admin/controlMedicos', { title: 'AdminX' }); });
-        app.get('/admin/controlUsuarios', auth, authUsuario4, adminUserController.verUsuarios);
+        app.get('/admin/controlMedicos', function (req, res, next) { res.render('vista/admin/controlMedicos', { title: 'AdminX' }); });
+        app.get('/admin/controlUsuarios', auth , adminUserController.verUsuarios);
         app.get('/admin/controlUsuarios/listados', auth, adminUserController.listarUsuarios);
         app.get('/admin/controlMedico/listados', auth, medicoController.listarMedicos);
         app.get('/admin/controlMedico/medicoPersona', auth, medicoController.listarMedicoPersona);
