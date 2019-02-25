@@ -23,7 +23,7 @@
     <div class="adminx-container " >
         <!-- Header -->
         <nav class="navbar navbar-expand justify-content-between fixed-top">
-            <a class="navbar-brand mb-0 h1 d-none d-md-block" href="index.html">
+            <a class="navbar-brand mb-0 h1 d-none d-md-block" href="/usuario/home">
                 <img src="../demo/img/logo.png" class="navbar-brand-image d-inline-block align-top mr-2" alt="">
                 Bienvenido Usuario......
             </a>
@@ -119,7 +119,7 @@
               <div class="col-md-12">
                 <div class="box">
                   <div class="box-header with-border">
-                    <h3 class="box-title">Clinica -----</h3>
+                    <h3 class="box-title">Clinica Lorem Ipsum</h3>
                     <div class="box-tools pull-right">
                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                       <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -137,37 +137,37 @@
 <div class="w3-content w3-display-container">
 
 <div class="w3-display-container mySlides">
-  <img src="https://www.w3schools.com/w3css/img_snowtops.jpg" style="width:100%">
-  <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
-    French Alps
-  </div>
-</div>
-
-<div class="w3-display-container mySlides">
-  <img src="https://www.w3schools.com/w3css/img_lights.jpg" style="width:100%">
-  <div class="w3-display-bottomright w3-large w3-container w3-padding-16 w3-black">
-    Northern Lights
-  </div>
-</div>
-
-<div class="w3-display-container mySlides">
-  <img src="https://www.w3schools.com/w3css/img_mountains.jpg" style="width:100%">
+  <img src="http://www.elhospital.com/documenta/imagenes/119636/Arritmias-G.jpg" style="width:100%">
   <div class="w3-display-topleft w3-large w3-container w3-padding-16 w3-black">
-    Beautiful Mountains
+    Cardeologia
   </div>
 </div>
 
 <div class="w3-display-container mySlides">
-  <img src="https://www.w3schools.com/w3css/img_forest.jpg" style="width:100%">
+  <img src="http://lademajagua.cu/wp-content/uploads/2017/10/dermatologia-estetica-680x453.jpg" style="width:100%">
   <div class="w3-display-topright w3-large w3-container w3-padding-16 w3-black">
-    The Rain Forest
+    Dermatologia
   </div>
 </div>
 
 <div class="w3-display-container mySlides">
-  <img src="https://www.w3schools.com/w3css/img_mountains.jpg" style="width:100%">
-  <div class="w3-display-middle w3-large w3-container w3-padding-16 w3-black">
-    Mountains!
+  <img src="http://cmdparets.com/wp-content/uploads/2017/06/Odontologia-minimamente-invasiva-727x409.jpg" style="width:100%">
+  <div class="w3-display-topleft w3-large w3-container w3-padding-16 w3-black">
+ Odontología
+  </div>
+</div>
+
+<div class="w3-display-container mySlides">
+  <img src="http://www.clinicacondado.com/img/cab_ginecologia.jpg" style="width:100%">
+  <div class="w3-display-topright w3-large w3-container w3-padding-16 w3-black">
+    Ginecología 
+  </div>
+</div>
+
+<div class="w3-display-container mySlides">
+  <img src="http://policlinicaloja.com/wp-content/uploads/2015/09/otorrinolaringologia-policlinicaloja.jpg" style="width:100%">
+  <div class="w3-display-topright w3-large w3-container w3-padding-16 w3-black">
+    Otorrinolaringología.
   </div>
 </div>
 
@@ -296,83 +296,7 @@ function showDivs(n) {
                     <script src="/cssI/src/Chart.js"></script>
                     <script src="/cssI/src/fastclick.js"></script>
                     <script src="/cssI//src/app.js"></script>
-                    <script>
-                        $(function () {
-                            var areaChartData = {
-                                labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-                                datasets: [
-                                    {
-                                        label: "Compras",
-                                        fillColor: "rgba(210, 214, 222, 1)",
-                                        strokeColor: "rgba(210, 214, 222, 1)",
-                                        pointColor: "rgba(210, 214, 222, 1)",
-                                        pointStrokeColor: "#c1c7d1",
-                                        pointHighlightFill: "#fff",
-                                        pointHighlightStroke: "rgba(220,220,220,1)",
-                                        data: [9.00, 2.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00]
-                                    },
-                                    {
-                                        label: "Ventas",
-                                        fillColor: "rgba(60,141,188,0.9)",
-                                        strokeColor: "rgba(60,141,188,0.8)",
-                                        pointColor: "#3b8bba",
-                                        pointStrokeColor: "rgba(60,141,188,1)",
-                                        pointHighlightFill: "#fff",
-                                        pointHighlightStroke: "rgba(60,141,188,1)",
-                                        data: [26.00, 12.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00]
-                                    }
-                                ]
-                            };
-                            //-------------
-                            //- BAR CHART -
-                            //-------------
-                            var barChartCanvas = $("#barChart").get(0).getContext("2d");
-                            var barChart = new Chart(barChartCanvas);
-                            var barChartData = areaChartData;
-                            barChartData.datasets[1].fillColor = "#00a65a";
-                            barChartData.datasets[1].strokeColor = "#00a65a";
-                            barChartData.datasets[1].pointColor = "#00a65a";
-                            var barChartOptions = {
-                                scaleBeginAtZero: true,
-                                scaleShowGridLines: true,
-                                scaleGridLineColor: "rgba(0,0,0,.05)",
-                                scaleGridLineWidth: 1,
-                                scaleShowHorizontalLines: true,
-                                scaleShowVerticalLines: true,
-                                barShowStroke: true,
-                                barStrokeWidth: 2,
-                                barValueSpacing: 5,
-                                barDatasetSpacing: 1,
-                                legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
-
-                                responsive: true,
-                                maintainAspectRatio: true
-                            };
-
-                            barChartOptions.datasetFill = false;
-                            barChart.Bar(barChartData, barChartOptions);
-                        });
-                    </script>
-
-
-                    <script>
-                        (function () {
-                            'use strict';
-
-                            window.addEventListener('load', function () {
-                                var form = document.getElementById('needs-validation');
-                                if (form !== null) {
-                                    form.addEventListener('submit', function (event) {
-                                        if (form.checkValidity() === false) {
-                                            event.preventDefault();
-                                            event.stopPropagation();
-                                        }
-                                        form.classList.add('was-validated');
-                                    }, false);
-                                }
-                            }, false);
-                        })();
-                    </script>
+            
 
 
 </body>

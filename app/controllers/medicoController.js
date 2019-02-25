@@ -40,20 +40,17 @@ class MedicoController {
 
     listarMedicoPersona(req, res) {
 
-        var lista = [];
-        Persona.findAll({
-            where: { id_rol: 3 }, include: [
-                { model: models.medico, where: { id: req.user.id } }]
-        }).then(function (medicoPersona) {
+        var lista =[];
+        Persona.findAll({ where: { id_rol: 3 }, include: { model: models.cuenta } }).then(function (medicoPersona) {
             Medico.findAll({}).then(function (medico) {
                 lista.push(medicoPersona);
                 lista.push(medico);
-                console.log(medicoPersona);
-                res.status(200).json(medicoPersona);
-
+                console.log(lista);
+                res.send(lista);
+    
             }).catch(function (err) {
                 console.log("Error:", err);
-
+    
             });
 
         }).catch(function (err) {
