@@ -39,6 +39,7 @@ module.exports = function (sequelize, Sequelize) {
         foreignKey: 'id_consulta_medica',
         constraints: false
     });
+    
 
     return Receta;
 };

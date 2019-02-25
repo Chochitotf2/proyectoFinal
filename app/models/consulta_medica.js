@@ -60,7 +60,15 @@ module.exports = function (sequelize, Sequelize) {
         foreignKey: 'id_historial',
         constraints: false
     });
-
+    
+    Consulta_medica.associate = function (models) {
+        models.consulta_medica.hasOne(models.receta, {
+            foreignKey: 'id_consulta_medica'
+        });
+      //  models.consulta_medica.hasOne(models.examenes, {
+       //     foreignKey: 'id_consulta_medica'
+      ///  });
+    }
 
   
 

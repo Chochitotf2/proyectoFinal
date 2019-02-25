@@ -28,35 +28,76 @@ module.exports = function (app, passport) {
                         res.redirect('/login');
                 }
         }
+        var authUsuario = function middleWare(req, res, next) {
+                if (req.user.rol == 'usuario') {
+                        if (req.user.estado ==true) {
+                                next();
+                        }else{
+                                res.redirect('/nop');
+                        }
+                     
+                } else {
+                        //  alert('err_cred', 'Inicia sesion!!!');
+                        res.redirect('/upps');
+                }
+        }
+        var authUsuario2 = function middleWare(req, res, next) {
+                if (req.user.estadoHistorial) {
+                        next();
+                } else {
+                        //  alert('err_cred', 'Inicia sesion!!!');
+                        res.redirect('/usuario/miHistorial');
+                }
+        }
+        var authUsuario3 = function middleWare(req, res, next) {
+                if (req.user.rol == 'medico') {
+                        if (req.user.estado ==true) {
+                                next();
+                        }else{
+                                res.redirect('/nop');
+                        }
+                } else {
+                        //  alert('err_cred', 'Inicia sesion!!!');
+                        res.redirect('/upps');
+                }
+        }
+        var authUsuario4 = function middleWare(req, res, next) {
+                if (req.user.rol == 'administrador') {
+                        next();
+                } else {
+                        //  alert('err_cred', 'Inicia sesion!!!');
+                        res.redirect('/upps');
+                }
+        }
+        app.get('/nop', function (req, res, next) { res.render('indexnop', { title: 'AdminX' }); });
+
+        app.get('/home', function (req, res, next) { res.render('index', { title: 'AdminX' }); });
 
 
-        //principal
+        // medico no agregar auth
+        app.get('/medico/misConsultas/:external', medicoController.misConsultas);
+        app.get('/usuario/misCitasMedico', medicoController.misCitasMedico);
 
-      
+
         //vistas Medico
-        
-        app.get('/medico/home', function (req, res, next) { res.render('vista/medico/medicoInicio', { title: 'AdminX' }); });
-        app.get('/medico/controlCitas', medicoController.verRegistroParaMedicos);
-        app.get('/medico/nuevaConsulta', medicoController.pantallaNuevaConsulta);
-        app.get('/medico/historialPaciente',  medicoController.historialPaciente);
-               app.get('/medico/editar', medicoController.verEditarMedico);
+        app.get('/medico/home', auth, authUsuario3, function (req, res, next) { res.render('vista/medico/medicoInicio', { title: 'AdminX' }); });
+        app.get('/medico/controlCitas', auth, authUsuario3, medicoController.verRegistroParaMedicos);
+        app.get('/medico/nuevaConsulta', auth, authUsuario3, medicoController.pantallaNuevaConsulta);
+        app.get('/medico/historialPaciente', auth, authUsuario3, medicoController.historialPaciente);
+        app.get('/medico/editar', auth, authUsuario3, medicoController.verEditarMedico);
+
+        app.post('/medico/guardarCita', authUsuario3, medicoController.agendarCitaMedico);
+        app.post('/guardarConsultaMedica', authUsuario3, medicoController.guardarConsultaMedica);
+
+
+        app.get('/upps', function (req, res, next) { res.render('ups', { title: 'AdminX' }); });
+
         app.get('/lista/editar', medicoController.verEditar);
         app.post('/medico/guardarEditar', userController.modificarMedic);
-  
-  
-
-        app.get('/medico/editar', medicoController.verEditarMedico);
-        app.get('/usuario/misCitasMedico',  medicoController.misCitasMedico);
-
-        app.post('/medico/guardarCita', medicoController.agendarCitaMedico);
-        app.post('/guardarConsultaMedica', medicoController.guardarConsultaMedica);
 
         //Vistas Admin
-        app.get('/admin/darDeBaja/:external',auth, medicoController.darBaja);
-        app.get('/admin/darDeBajaUser/:external',auth, medicoController.darBajaUser);
-        
-        app.get('/admin/controlMedicos', function (req, res, next) { res.render('vista/admin/controlMedicos', { title: 'AdminX' }); });
-        app.get('/admin/controlUsuarios', auth, adminUserController.verUsuarios);
+        app.get('/admin/controlMedicos', authUsuario4, function (req, res, next) { res.render('vista/admin/controlMedicos', { title: 'AdminX' }); });
+        app.get('/admin/controlUsuarios', auth, authUsuario4, adminUserController.verUsuarios);
         app.get('/admin/controlUsuarios/listados', auth, adminUserController.listarUsuarios);
         app.get('/admin/controlMedico/listados', auth, medicoController.listarMedicos);
         app.get('/admin/controlMedico/medicoPersona', auth, medicoController.listarMedicoPersona);
@@ -67,30 +108,33 @@ module.exports = function (app, passport) {
                 }
                 ));
 
+        app.get('/admin/darDeBaja/:external', auth, medicoController.darBaja);
+        app.get('/admin/darDeBajaUser/:external', auth, medicoController.darBajaUser);
 
 
 
-
-        //Vistas User s
-        app.get('/usuario/home', function (req, res, next) { res.render('vista/usuario/usuarioHome', { title: 'AdminX' }); });
-        app.get('/usuario/registroCita',userController.verRegistroMedicos );
+        //ajax no  agregar  auth
+        app.get('/usuario/filtradoFecha/:external/:exter', userController.filtrarCitas);
+        app.get('/usuario/tablaCitas/:medico', userController.datosCitaMedico);
+        app.get('/crearpdf/:data', userController.crearpdf);
+        app.get('/carga', userController.abrirPdf);
+        app.get('/crearpdfReceta/:data', userController.crearpdfReceta);
+        app.get('/cargaReceta', userController.abrirPdfReceta);
+        app.get('/usuario/quitar/:external', userController.eliminarCita);
+        app.get('/usuario/filtradoMedico/:external', userController.filtrarCuentaMedico);
+        app.get('/usuario/misCitas', userController.misCitas);
+        app.get('/usuario/misConsultas', userController.misConsultas);
         app.get('/usuario/verEditar', userController.verEditar);
-        app.get('/usuario/historialMedico', function (req, res, next) { res.render('vista/usuario/historialMedico', { title: 'AdminX' }); });
-        app.get('/usuario/miHistorial', userController.comprobarHistorial);
-        app.get('/usuario/filtradoFecha/:external/:exter',  userController.filtrarCitas);
-        app.get('/usuario/tablaCitas/:medico',  userController.datosCitaMedico);
-        app.get('/usuario/quitar/:external',  userController.eliminarCita);
-        app.get('/usuario/filtradoMedico/:external',  userController.filtrarCuentaMedico);
-        app.get('/usuario/misCitas',  userController.misCitas);
-        app.get('/usuario/misConsultas',  userController.misConsultas);
-        app.get('/crearpdf/:data',userController.crearpdf);
-        app.get('/carga',userController.abrirPdf); 
+        //Vistas User 
+        app.get('/usuario/home', auth, authUsuario, authUsuario2, function (req, res, next) { res.render('vista/usuario/usuarioHome', { title: 'AdminX' }); });
+        app.get('/usuario/registroCita', auth, authUsuario, authUsuario2, userController.verRegistroMedicos);
+        app.get('/usuario/historialMedico', auth, authUsuario, authUsuario2, function (req, res, next) { res.render('vista/usuario/historialMedico', { title: 'AdminX' }); });
+        app.get('/usuario/miHistorial', auth, authUsuario, userController.comprobarHistorial);
 
 
         app.post('/usuario/guardaHistorial', userController.guardarHistorial);
         app.post('/usuario/guardarEditar', userController.modificarPerson);
         app.post('/usuario/guardarCita', userController.agendarCita);
-
 
 
 

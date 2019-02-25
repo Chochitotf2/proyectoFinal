@@ -40,17 +40,17 @@ class MedicoController {
 
     listarMedicoPersona(req, res) {
 
-        var lista =[];
+        var lista = [];
         Persona.findAll({ where: { id_rol: 3 }, include: { model: models.cuenta } }).then(function (medicoPersona) {
             Medico.findAll({}).then(function (medico) {
                 lista.push(medicoPersona);
                 lista.push(medico);
                 console.log(lista);
                 res.send(lista);
-    
+
             }).catch(function (err) {
                 console.log("Error:", err);
-    
+
             });
 
         }).catch(function (err) {
@@ -114,28 +114,65 @@ class MedicoController {
     }
 
     darBaja(req, res) {
+   
         var external = req.params.external;
-        Cuenta.update({
-            estado: false
-        }, { where: { external_id: external } }).then(function (updatedCuenta, created) {
-            if (updatedCuenta) {
-                req.flash('info', 'Se ha dado de baja correctamente', false);
-                res.redirect('/admin/controlMedicos');
-            }
+
+
+        Cuenta.findOne({  where: { external_id: external } }).then(function (medico) {
+            if (medico) {
+              if(medico.estado==true){
+                var estados = false;
+              }else{
+                var estados = true;
+              }
+              Cuenta.update({
+                estado: estados
+            }, { where: { external_id: external } }).then(function (updatedCuenta, created) {
+                if (updatedCuenta) {
+
+                    req.flash('info', 'Se ha dado de baja correctamente', false);
+                    res.redirect('/admin/controlUsuarios');
+                }
+            });         }
+
+
+        }).catch(function (err) {
+            console.log("Error:", err);
+
         });
+
     }
 
 
     darBajaUser(req, res) {
         var external = req.params.external;
-        Cuenta.update({
-            estado: false
-        }, { where: { external_id: external } }).then(function (updatedCuenta, created) {
-            if (updatedCuenta) {
-                req.flash('info', 'Se ha dado de baja correctamente', false);
-                res.redirect('/admin/controlUsuarios');
-            }
+
+
+        Cuenta.findOne({  where: { external_id: external } }).then(function (medico) {
+            if (medico) {
+              if(medico.estado==true){
+                var estados = false;
+              }else{
+                var estados = true;
+              }
+              Cuenta.update({
+                estado: estados
+            }, { where: { external_id: external } }).then(function (updatedCuenta, created) {
+                if (updatedCuenta) {
+
+                    req.flash('info', 'Se ha dado de baja correctamente', false);
+                    res.redirect('/admin/controlUsuarios');
+                }
+            });         }
+
+
+        }).catch(function (err) {
+            console.log("Error:", err);
+
         });
+
+
+
     }
 
 
@@ -326,5 +363,23 @@ class MedicoController {
 
     }
 
+
+
+    misConsultas(req, res) {
+        var external = req.params.external;
+
+        Consulta.findAll({
+            where: {},
+            include: [
+                { model: models.historial, where: { id_persona: external } },
+                { model: models.receta }], order: [["fecha", "DESC"]]
+        }).then(function (citas) {
+            //id persona id de la persona que entra por session
+            if (citas) {
+                console.log(citas);
+                res.status(200).json(citas);
+            }
+        });
+    }
 }
 module.exports = MedicoController;

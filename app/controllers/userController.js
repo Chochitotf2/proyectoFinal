@@ -263,7 +263,7 @@ class CuentaController {
 
     crearpdf(req, res) {
         var con = req.params.data;
-        Consulta.findOne({ where: {external_id:con}, include: { model: models.receta }  }).then(function (medicos) {
+        Consulta.findOne({ where: {external_id:con} }).then(function (medicos) {
             if (medicos) {
                 contenido = 
                 '<div style="padding: 70px">'+
@@ -310,8 +310,48 @@ class CuentaController {
         });
     }
 
+    crearpdfReceta(req, res) {
+        var con = req.params.data;
+        Consulta.findOne({ where: {external_id:con}, include: { model: models.receta }  }).then(function (medicos) {
+            if (medicos) {
+                console.log(medicos.recetum);
+                contenido = 
+                '<div style="padding: 70px">'+
+                '<h4>Fecha Emision</h4>'+
+                '<h5>'+medicos.recetum.fecha_Emision+'</h5>'+
+                '<h1>Receta Medica</h1>'+
+                '<h4>Medicamento   :</h4>'+
+                '<h5>'+medicos.recetum.medicamento+'</h5>'+
+                '<h4>Duracion del Tratamiento :</h4>'+
+                '<h5>'+medicos.recetum.duracion_tratamiento+'</h5>'+                
+                '<h4>Via de administracion :</h4>'+
+                '<h5>'+medicos.recetum.via_administracion+'</h5>'+
+                '<h4>Plan Tratamiento :</h4>'+
+                '<h5>'+medicos.recetum.plan_de_tratamiento+'</h5>'+
+                '<h4>Objetivo Tratamiento </h4>'+
+                '<h5>'+medicos.recetum.objetivo_tratamiento+'</h5>';
+               
+                pdf.create(contenido).toFile('./test1.pdf', function (err, resp) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.status(200).json('bn');
+                    }
+                });
 
 
+
+            }
+        });
+    }
+    abrirPdfReceta(req, res) {
+        var path_file = './test1.pdf';
+        fs.exists(path_file, function (exists) {
+            if (exists) {
+                res.sendFile(path.resolve(path_file));
+            }
+        });
+    }
 
 
 

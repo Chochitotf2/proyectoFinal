@@ -23,7 +23,8 @@ module.exports = function (passport, cuenta, persona, rol) {
                     id_persona: cuenta.persona.external_id,
                     nombre: cuenta.persona.apellido + " " + cuenta.persona.nombre,
                     rol: cuenta.persona.rol.nombre,
-                    estadoHistorial: cuenta.persona.estado_historial
+                    estadoHistorial: cuenta.persona.estado_historial,
+                    estado :cuenta.estado
                 };
                 console.log(userinfo);
                 done(null, userinfo);
