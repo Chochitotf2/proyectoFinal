@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="/cssI/src/select2.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/cssI/src/skin-blue.css" media="screen" />
 
+    <link rel="stylesheet" type="text/css" href="/cssI/src/screen.css" media="screen" />
+
     <script src="/cssI/src/Chart.js"></script>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
@@ -519,7 +521,7 @@
                                     <h4 class="modal-title">Nueva Cita</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="/medico/guardarCita" method="post">
+                                    <form id="formulario" action="/medico/guardarCita" method="post">
                                         <div class="row ">
                                             <div class="col-md-6 form-group">
                                                 <label for="fechaa">Fecha</label>
@@ -568,7 +570,7 @@
                                                         </table>
                                                     </div>
 
-                                                    <select name="hora" id="hora" class="form-control" required="">
+                                                    <select name="hora" id="hora" class="form-control" >
 
                                                     </select>
 
@@ -790,7 +792,47 @@
 <script src="/cssI/src/bootstrap.js"></script>
 <script src="/cssI/src/Chart.js"></script>
 <script src="/cssI/src/fastclick.js"></script>
-<script src="/cssI//src/app.js"></script>
+<script src="/cssI/src/app.js"></script>
+
+
+<script src="/cssI/src/js/validator.js"></script>
+<script src="/cssI/src/validate.js"></script>
+<script src="/cssI/src/app.js"></script>
+
+<script>
+    $().ready(function () {
+        $("#formulario").validate({
+            rules: {
+                fecha: {
+                    required: true,
+                    date: true
+                },
+                usaurio: {
+                    required: true
+                },
+                medico:{
+                    required:true
+                }
+            },
+            messages: {
+                fecha: {
+                    required: "Seleccione una fecha"
+                },
+                usuario: {
+                    required: "Es necesario selecciona un usuario"
+                },
+                medico: {
+                    required: "Es necesario elegir un medico"
+                }
+            }
+        });
+    });
+     
+</script>
+
+
+
+
 <script>
     $(function () {
         var areaChartData = {

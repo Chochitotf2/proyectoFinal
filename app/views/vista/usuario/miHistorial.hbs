@@ -11,7 +11,15 @@
     <link rel="stylesheet" type="text/css" href="/cssI/src/select2.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/cssI/src/skin-blue.css" media="screen" />
 
-    
+    <link rel="stylesheet" type="text/css" href="/cssI/src/screen.css" media="screen" />
+
+    <script src="/cssI/src/Chart.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+
 
 </head>
 
@@ -40,10 +48,8 @@
                         <img src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"
                             class="d-inline-block align-top" alt="">
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        
-                       
-                        <a class="dropdown-item text-danger" href="#">Sign out</a>
+                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item text-danger" href="/cerrar_sesion">Cerrar sesion</a>
                     </div>
                 </li>
             </ul>
@@ -87,7 +93,7 @@
                                         </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body">
-                                        <form class="form-horizontal" method="post" id="guardar_consulta"
+                                        <form id="formulario" class="form-horizontal" method="post" id="guardar_consulta"
                                             name="guardar_consulta" action="/usuario/guardaHistorial">
                                             <ul class="nav nav-tabs">
                                                 <li class="nav-item">
@@ -184,15 +190,16 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                             
-                                                                <label for="motivo" class="control-label">Sufre de algun problema medico ?</label>
-                                                                <textarea class="form-control" id="enfermedades" name="enfermedades"
-                                                                    maxlength="255" autocomplete="off"
-                                                                    required=""></textarea>
-                                                            
-                                                        
-                                                        
-                                                    
+
+                                                                <label for="motivo" class="control-label">Sufre de algun
+                                                                    problema medico ?</label>
+                                                                <textarea class="form-control" id="enfermedades"
+                                                                    name="enfermedades" maxlength="255"
+                                                                    autocomplete="off" required=""></textarea>
+
+
+
+
                                                             </div>
                                                         </div>
 
@@ -227,7 +234,8 @@
                                                             <div class="form-group">
                                                                 <label for="edad" class="control-label">Grupo sanguineo
                                                                 </label><br>
-                                                                <select name="grupoSa" id="grupoSa" class="selectpicker col-md-12 card">
+                                                                <select name="grupoSa" id="grupoSa"
+                                                                    class="selectpicker col-md-12 card">
                                                                     <option>A+</option>
                                                                     <option>O+</option>
                                                                     <option>B+</option>
@@ -245,7 +253,8 @@
 
                                                         <div class="col-md-2 card">
                                                             <div class="form-group">
-                                                                <label for="edad" class="control-label">Tiene problemas cardiacos ?
+                                                                <label for="edad" class="control-label">Tiene problemas
+                                                                    cardiacos ?
                                                                 </label><br>
                                                                 <div class="form-check form-check-inline">
                                                                     <input class="form-check-input" type="radio"
@@ -271,33 +280,34 @@
 
                                                     </div>
                                                     <div class="row">
-                                                         <div class="col-md-12">
+                                                        <div class="col-md-12">
                                                             <div class="form-group">
-                                                             
-                                                                <label for="motivo" class="control-label">Antecedentes familiares que quiera dar a conocer ?</label>
-                                                                <textarea  style="height: 100px" class="form-control" id="familia" name="familia"
-                                                                    maxlength="100" autocomplete="off"
-                                                                    required=""></textarea>
-                                                            
-                                                        
-                                                        
-                                                    
+
+                                                                <label for="motivo" class="control-label">Antecedentes
+                                                                    familiares relevantes </label>
+                                                                <textarea style="height: 100px" class="form-control"
+                                                                    id="familia" name="familia" maxlength="100"
+                                                                    autocomplete="off" required=""></textarea>
+
+
+
+
                                                             </div>
                                                         </div>
-                                                   
+
+                                                    </div>
+
+
                                                 </div>
-
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary waves-effect"
-                                                    data-dismiss="modal">Cerrar</button>
-                                                <input type="hidden" name="id_consulta" id="id_consulta" value="39">
-                                                <input type="hidden" name="btn_action" id="btn_action" value="Add">
-                                                <input type="submit" name="action" id="action" class="btn btn-primary"
-                                                    value="Guardar Consulta">
-                                                <br><br>
-                                            </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary waves-effect"
+                                                        data-dismiss="modal">Cerrar</button>
+                                                    <input type="hidden" name="id_consulta" id="id_consulta" value="39">
+                                                    <input type="hidden" name="btn_action" id="btn_action" value="Add">
+                                                    <input type="submit" name="action" id="action"
+                                                        class="btn btn-primary" value="Guardar Consulta">
+                                                    <br><br>
+                                                </div>
 
                                         </form>
 
@@ -458,7 +468,42 @@
                     <script src="/cssI/src/Chart.js"></script>
                     <script src="/cssI/src/fastclick.js"></script>
                     <script src="/cssI//src/app.js"></script>
-                   
+
+
+<script src="/cssI/src/js/validator.js"></script>
+<script src="/cssI/src/validate.js"></script>
+<script src="/cssI/src/app.js"></script>
+
+<script>
+    $().ready(function () {
+        $("#formulario").validate({
+            rules: {
+                profesion: {
+                    required: true
+                },
+                enfermedades: {
+                    required: true
+                },
+                familia:{
+                    required:true
+                }
+            },
+            messages: {
+                profesion: {
+                    required: "Ingrese su profesion "
+                },
+                enfermedades: {
+                    required: "Es necesario rellenar este campo para una mejor atencion"
+                },
+                familia: {
+                    required: "Es necesario rellenar este campo para una mejor atencion "
+                }
+            }
+        });
+    });
+     
+</script>
+
 
                     <script>
                         (function () {

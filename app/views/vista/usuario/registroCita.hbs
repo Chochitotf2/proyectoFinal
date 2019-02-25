@@ -10,11 +10,15 @@
     <link rel="stylesheet" type="text/css" href="/cssI/src/main.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/cssI/src/select2.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/cssI/src/skin-blue.css" media="screen" />
+
+    <link rel="stylesheet" type="text/css" href="/cssI/src/screen.css" media="screen" />
+
+    <script src="/cssI/src/Chart.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="js/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
     <script>
         var html = "";
         $(document).ready(function () {
@@ -27,7 +31,7 @@
             if (day < 10)
                 day = "0" + day;
             var today = now.getFullYear() + '-' + month + '-' + day;
-            
+
             $('#fecha').val(today);
             document.getElementById("fecha").min = today;
 
@@ -91,16 +95,16 @@
                         html += '<td> ' + medico.hora + '     </td>';
                         html += '<td>' + data[0].nombre + ' ' + data[0].apellido + '</td>';
                         html += '<td>' + 'Consultorio Nro ' + data[1].nro_consultorio + '</td>';
-                        html += '<td>' +data[1].especialidad+ '</td>';
+                        html += '<td>' + data[1].especialidad + '</td>';
                         //html += '<td>' + data[1].especialidad + '</td>';
 
                         if (medico.estado == true) {
-                            html += '<td> ' + ' <button id=' + medico.external_id+ '_a' +' data-feather="plus" data-toggle="modal"  data-target=".bd-example-modal-lg"  type="button" class="btn btn-sm btn-outline-warning">Modificar</button>';
+                            html += '<td> ' + ' <button id=' + medico.external_id + '_a' + ' data-feather="plus" data-toggle="modal"  data-target=".bd-example-modal-lg"  type="button" class="btn btn-sm btn-outline-warning">Modificar</button>';
                             html += ' <button  onClick="return item(' + "'" + medico.external_id + "'" + ', 1)"  type="button"  class="btn btn-sm btn-success "> Activo </button>' + '</td>';
                             html += '';
                             html += '<script >  ' +
 
-                                '$("#' + medico.external_id + '_a' +'").click(function () {' +
+                                '$("#' + medico.external_id + '_a' + '").click(function () {' +
                                 ' document.getElementById("medico").disabled = true;' +
                                 '$("#medico").val("' + data[1].id + '");' +
                                 '$("#consultorio").val("' + data[1].nro_consultorio + '");' +
@@ -225,7 +229,7 @@
                 <!-- Notificatoins -->
 
                 <!-- Notifications -->
-           <li class="nav-item dropdown">
+                <li class="nav-item dropdown">
                     <a class="nav-link avatar-with-name" id="navbarDropdownMenuLink" data-toggle="dropdown" href="#">
                         <img src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"
                             class="d-inline-block align-top" alt="">
@@ -239,7 +243,7 @@
         <!-- // Header -->
 
         <!-- expand-hover push -->
-  <div class="adminx-sidebar expand-hover push" id="sidebar">
+        <div class="adminx-sidebar expand-hover push" id="sidebar">
             <ul class="sidebar-nav">
                 <li class="sidebar-nav-item">
                     <a href='/usuario/home' class="sidebar-nav-link">
@@ -518,8 +522,9 @@
                                     <h4 class="modal-title">Nueva Cita</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="/usuario/guardarCita" method="post">
-                                        <div class="row ">
+                                    <form id="formulario" name="formulario" action="/usuario/guardarCita" method="post">
+                                       <div> <div>
+                                            <div class="row ">
                                             <div class="col-md-6 form-group">
                                                 <label for="fechaa">Fecha</label>
                                                 <div class="input-group">
@@ -627,6 +632,7 @@
                                         value="Guardar">
                                 </div>
 
+                                       </div>
                                 </form>
 
 
@@ -643,14 +649,41 @@
                     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
                     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-                    <script src="/dist/js/vendor.js"></script>
-                    <script src="/dist/js/adminx.js"></script>
+                    <script src="../dist/js/vendor.js"></script>
+                    <script src="../dist/js/adminx.js"></script>
 
                     <script src="/cssI/src/jQuery-2.js"></script>
                     <script src="/cssI/src/bootstrap.js"></script>
                     <script src="/cssI/src/Chart.js"></script>
                     <script src="/cssI/src/fastclick.js"></script>
-                    <script src="/cssI//src/app.js"></script>
+                    <script src="/cssI/src/app.js"></script>
+
+
+                    <script src="/cssI/src/js/validator.js"></script>
+                    <script src="/cssI/src/validate.js"></script>
+                    <script src="/cssI/src/app.js"></script>
+
+                    <script>
+                        $().ready(function () {
+                            $("#formulario").validate({
+                                rules: {
+                                    fecha: {
+                                        required: true,
+                                        date: true
+                                    }
+                                },
+                                messages: {
+                                    fecha: {
+                                        required: "Seleccione una fecha"
+                                    }
+                                }
+                            });
+                        });
+
+                    </script>
+
+
+
                     <script>
                         $(function () {
                             var areaChartData = {

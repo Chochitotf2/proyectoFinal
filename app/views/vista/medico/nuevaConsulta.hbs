@@ -11,7 +11,9 @@
     <link rel="stylesheet" type="text/css" href="/cssI/src/select2.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/cssI/src/skin-blue.css" media="screen" />
 
+    <link rel="stylesheet" type="text/css" href="/cssI/src/screen.css" media="screen" />
     <script src="/cssI/src/Chart.js"></script>
+
 </head>
 
 <body>
@@ -34,7 +36,7 @@
                 <!-- Notificatoins -->
 
                 <!-- Notifications -->
-          <li class="nav-item dropdown">
+                <li class="nav-item dropdown">
                     <a class="nav-link avatar-with-name" id="navbarDropdownMenuLink" data-toggle="dropdown" href="#">
                         <img src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg"
                             class="d-inline-block align-top" alt="">
@@ -48,75 +50,75 @@
         <!-- // Header -->
 
         <!-- expand-hover push -->
-         <div class="adminx-sidebar expand-hover push" id="sidebar">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-item">
-          <a href="/medico/home" class="sidebar-nav-link">
-            <span class="sidebar-nav-icon">
-              <i data-feather="home"></i>
-            </span>
-            <span class="sidebar-nav-name">
-              Inicio
-            </span>
-            <span class="sidebar-nav-end">
+        <div class="adminx-sidebar expand-hover push" id="sidebar">
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item">
+                    <a href="/medico/home" class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">
+                            <i data-feather="home"></i>
+                        </span>
+                        <span class="sidebar-nav-name">
+                            Inicio
+                        </span>
+                        <span class="sidebar-nav-end">
 
-            </span>
-          </a>
-        </li>
-
-
-        <li class="sidebar-nav-item">
-          <a  href='/medico/controlCitas' class="sidebar-nav-link" >
-            <span class="sidebar-nav-icon">
-              <i data-feather="calendar"></i>
-            </span>
-            <span class="sidebar-nav-name">
-              Control de citas
-            </span>
-          </a>
-        </li>
-
-        <li class="sidebar-nav-item">
-            <a  href='/medico/nuevaConsulta' class="sidebar-nav-link" >
-            <span class="sidebar-nav-icon">
-              <i data-feather="clipboard"></i>
-            </span>
-            <span class="sidebar-nav-name">
-              Nueva consulta
-            </span>
-
-          </a>
-        </li>
+                        </span>
+                    </a>
+                </li>
 
 
+                <li class="sidebar-nav-item">
+                    <a href='/medico/controlCitas' class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">
+                            <i data-feather="calendar"></i>
+                        </span>
+                        <span class="sidebar-nav-name">
+                            Control de citas
+                        </span>
+                    </a>
+                </li>
 
-        <li class="sidebar-nav-item">
-            <a  href='/medico/historialPaciente' class="sidebar-nav-link" >
-            <span class="sidebar-nav-icon">
-              <i data-feather="layers"></i>
-            </span>
-            <span class="sidebar-nav-name">
-              Historial pacientes
-            </span>
-          </a>
-        </li>
+                <li class="sidebar-nav-item">
+                    <a href='/medico/nuevaConsulta' class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">
+                            <i data-feather="clipboard"></i>
+                        </span>
+                        <span class="sidebar-nav-name">
+                            Nueva consulta
+                        </span>
 
-
-        <li class="sidebar-nav-item">
-           <a  href='/medico/editar' class="sidebar-nav-link" >
-            <span class="sidebar-nav-icon">
-              <i data-feather="user"></i>
-            </span>
-            <span class="sidebar-nav-name">
-              Datos personales
-            </span>
-
-          </a>
-        </li>
+                    </a>
+                </li>
 
 
-      </ul>
-    </div>
+
+                <li class="sidebar-nav-item">
+                    <a href='/medico/historialPaciente' class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">
+                            <i data-feather="layers"></i>
+                        </span>
+                        <span class="sidebar-nav-name">
+                            Historial pacientes
+                        </span>
+                    </a>
+                </li>
+
+
+                <li class="sidebar-nav-item">
+                    <a href='/medico/editar' class="sidebar-nav-link">
+                        <span class="sidebar-nav-icon">
+                            <i data-feather="user"></i>
+                        </span>
+                        <span class="sidebar-nav-name">
+                            Datos personales
+                        </span>
+
+                    </a>
+                </li>
+
+
+            </ul>
+        </div>
         <!-------------------------MAIN------------------------------>
         <!-- Main Content -->
         <div class="adminx-content">
@@ -158,46 +160,43 @@
                                                     class="fa fa-times"></i></button>
                                         </div>
                                     </div><!-- /.box-header -->
-
-                                    <div class="box-body">
-
-
-
-
-                                        <ul class="nav nav-tabs">
-
-                                            <li class="nav-item">
-                                                <a href="#consulta" data-toggle="tab" aria-expanded="false"
-                                                    class="nav-link active">
-                                                    Datos de Consulta
-                                                </a>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <a href="#receta" data-toggle="tab" aria-expanded="true"
-                                                    class="nav-link">
-                                                    Receta Medica
-                                                </a>
-                                            </li>
-
-                                        </ul>
-
-                                        <div class="tab-content">
-                                            <div class="tab-pane fade show active" id="consulta">
-                                                <div class="row">
+                                    <form id="formulario" action="/guardarConsultaMedica" method="post"
+                                        class="col-md-12" >
+                                        <div class="box-body" style="padding: 20px">
 
 
 
 
-                                                    <form action="/guardarConsultaMedica" method="post"
-                                                        class="col-md-12">
+                                            <ul class="nav nav-tabs">
+
+                                                <li class="nav-item">
+                                                    <a href="#consulta" data-toggle="tab" aria-expanded="false"
+                                                        class="nav-link active">
+                                                        Datos de Consulta
+                                                    </a>
+                                                </li>
+
+                                                <li class="nav-item">
+                                                    <a href="#receta" data-toggle="tab" aria-expanded="true"
+                                                        class="nav-link">
+                                                        Receta Medica
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane fade show active" id="consulta">
+
+                                                    <div class="row">
+
 
                                                         <br>
-                                                        <div class="row">
+                                                        <div style="padding-left: 10px" class="row">
 
                                                             <div class="col-md-6">
 
-
+<br>
 
                                                                 <div class="row form-group">
                                                                     <div class="col-md-12">
@@ -229,7 +228,8 @@
 
 
                                                             </div>
-                                                            <div class="col-md-3">
+                                                            
+                                                            <div class="col-md-3"><br>
                                                                 <div class="form-group">
                                                                     <label for="peso" class="control-label">Peso Actual
                                                                         (kg)</label>
@@ -242,7 +242,7 @@
                                                                         id="espec" name="espec">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3">
+                                                            <div class="col-md-3"><br>
                                                                 <div class="form-group">
                                                                     <label for="edad" class="control-label">Especialidad
                                                                         del Medico:</label>
@@ -279,277 +279,295 @@
 
                                                         </div>
 
-                                                </div>
-
-
-                                                <div style="display: flex;">
-
-                                                    <h4> </h4>
-                                                    <h4>Examenes de Control Medico :</h4>
-                                                    <br> <br>
-                                                    <div style="padding-left: 10px">
-                                                        <input style="width: 80px" id="external_verificar_examen"
-                                                            class="btn btn-sm btn-default " type="button"
-                                                            onclick="myFunction2()" value="NO">
                                                     </div>
-                                                    <br>
-                                                    <span id="span_product_details"><span id="row">
-                                                        </span></span>
-                                                    <hr>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
 
-                                                        <div class="form-group">
-                                                            <label for="laboratorio" class="control-label">Examen de
-                                                                Laboratorio:</label>
-                                                            <textarea class="form-control" id="laboratorio"
-                                                                name="laboratorio" maxlength="255" autocomplete="off"
-                                                                disabled>Sin Examenes de Laboratorio</textarea>
+
+                                                    <div style="display: flex;">
+
+                                                        <h4> </h4>
+                                                        <h4>Examenes de Control Medico :</h4>
+                                                        <br> <br>
+                                                        <div style="padding-left: 10px">
+                                                            <input style="width: 80px" id="external_verificar_examen"
+                                                                class="btn btn-sm btn-default " type="button"
+                                                                onclick="myFunction2()" value="NO">
                                                         </div>
-
-
+                                                        <br>
+                                                        <span id="span_product_details"><span id="row">
+                                                            </span></span>
+                                                        <hr>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="fisico" class="control-label">Examen
-                                                                Fisico:</label>
-                                                            <textarea class="form-control" id="fisico" name="fisico"
-                                                                maxlength="255" autocomplete="off"
-                                                                disabled>Sin Examenes </textarea>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+
+                                                            <div class="form-group">
+                                                                <label for="laboratorio" class="control-label">Examen de
+                                                                    Laboratorio:</label>
+                                                                <textarea class="form-control" id="laboratorio"
+                                                                    name="laboratorio" maxlength="255"
+                                                                    autocomplete="off"
+                                                                    disabled>Sin Examenes de Laboratorio</textarea>
+                                                            </div>
+
+
                                                         </div>
-                                                    </div>
-                                                </div>
-
-                                                <script>
-                                                    function myFunction2() {
-                                                        var medico = document.getElementById("external_verificar_examen").value;
-                                                        if (medico == 'NO') {
-                                                            $("#external_verificar_examen").val('SI');
-                                                            document.getElementById("laboratorio").disabled = false;
-                                                            document.getElementById("fisico").disabled = false;
-
-                                                            document.getElementById("laboratorio").required = true;
-                                                            document.getElementById("fisico").required = true;
-                                                            $("#laboratorio").val('');
-                                                            $("#fisico").val('');
-                                                        } else {
-                                                            $("#external_verificar_examen").val('NO');
-                                                            $("#laboratorio").val('');
-                                                            $("#fisico").val('');
-                                                            document.getElementById("laboratorio").disabled = true;
-                                                            document.getElementById("fisico").disabled = true;
-
-                                                            document.getElementById("laboratorio").required = false;
-                                                            document.getElementById("fisico").required = false;
-                                                        }
-
-
-                                                    }
-
-                                                </script>
-
-
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="diagnostico"
-                                                                class="control-label">Diagnostico:</label>
-                                                            <textarea class="form-control" id="diagnostico"
-                                                                name="diagnostico" maxlength="255" autocomplete="off"
-                                                                required=""></textarea>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="fisico" class="control-label">Examen
+                                                                    Fisico:</label>
+                                                                <textarea class="form-control" id="fisico" name="fisico"
+                                                                    maxlength="255" autocomplete="off"
+                                                                    disabled>Sin Examenes </textarea>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="motivo" class="control-label">Recomendacion
-                                                                :</label>
-                                                            <textarea class="form-control" id="recomendacion"
-                                                                name="recomendacion" maxlength="255" autocomplete="off"
-                                                                required=""></textarea>
-                                                        </div>
 
-                                                    </div>
+                                                    <script>
+                                                        function myFunction2() {
+                                                            var medico = document.getElementById("external_verificar_examen").value;
+                                                            if (medico == 'NO') {
+                                                                $("#external_verificar_examen").val('SI');
+                                                                document.getElementById("laboratorio").disabled = false;
+                                                                document.getElementById("fisico").disabled = false;
 
+                                                                document.getElementById("laboratorio").required = true;
+                                                                document.getElementById("fisico").required = true;
+                                                                $("#laboratorio").val('');
+                                                                $("#fisico").val('');
+                                                            } else {
+                                                                $("#external_verificar_examen").val('NO');
+                                                                $("#laboratorio").val('');
+                                                                $("#fisico").val('');
+                                                                document.getElementById("laboratorio").disabled = true;
+                                                                document.getElementById("fisico").disabled = true;
 
-
-                                                </div>
-
-
-
-
-                                            </div>
-                                            <div class="tab-pane fade" id="receta"> <br>
-                                                <div style="display: flex;">
-
-                                                    <h4> </h4>
-                                                    <h4> Agregar Receta Medica : </h4>
-                                                    <div style="padding-left: 10px">
-
-                                                        <input type="hidden" name="external_verificar"
-                                                            id="external_verificar" value="no">
-                                                        <input style="width: 80px" id="external_verificar1"
-                                                            class="btn btn-sm btn-default " type="button"
-                                                            onclick="myFunction()" value="NO">
-                                                        <script>
-                                                            function myFunction() {
-                                                                var medico = document.getElementById("external_verificar1").value;
-                                                                if (medico == 'NO') {
-                                                                    $("#external_verificar1").val('SI');
-                                                                    $("#external_verificar").val('si');
-                                                                    document.getElementById("medicamento").disabled = false;
-                                                                    document.getElementById("duracion").disabled = false;
-                                                                    document.getElementById("administracion").disabled = false;
-                                                                    document.getElementById("tratamiento").disabled = false;
-                                                                    document.getElementById("objetivo_tratamiento").disabled = false;
-
-                                                                    document.getElementById("medicamento").required = true;
-                                                                    document.getElementById("duracion").required = true;
-                                                                    document.getElementById("administracion").required = true;
-                                                                    document.getElementById("tratamiento").required = true;
-                                                                    document.getElementById("objetivo_tratamiento").required = true;
-
-                                                                } else {
-                                                                    $("#external_verificar").val('no');
-                                                                    $("#external_verificar1").val('NO');
-                                                                    $("#medicamento").val('');
-                                                                    $("#duracion").val('');
-                                                                    $("#administracion").val('');
-                                                                    $("#tratamiento").val('');
-                                                                    $("#objetivo_tratamiento").val('');
-                                                                    document.getElementById("medicamento").disabled = true;
-                                                                    document.getElementById("duracion").disabled = true;
-                                                                    document.getElementById("administracion").disabled = true;
-                                                                    document.getElementById("tratamiento").disabled = true;
-                                                                    document.getElementById("objetivo_tratamiento").disabled = true;
-
-                                                                    document.getElementById("medicamento").required = false;
-                                                                    document.getElementById("duracion").required = false;
-                                                                    document.getElementById("administracion").required = false;
-                                                                    document.getElementById("tratamiento").required = false;
-                                                                    document.getElementById("objetivo_tratamiento").required = false;
-                                                                }
-
-
+                                                                document.getElementById("laboratorio").required = false;
+                                                                document.getElementById("fisico").required = false;
                                                             }
 
-                                                        </script>
+
+                                                        }
+
+                                                    </script>
+
+
+                                                    <br>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="diagnostico"
+                                                                    class="control-label">Diagnostico:</label>
+                                                                <textarea class="form-control" id="diagnostico"
+                                                                    name="diagnostico" maxlength="255"
+                                                                    autocomplete="off" required=""></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="motivo" class="control-label">Recomendacion
+                                                                    :</label>
+                                                                <textarea class="form-control" id="recomendacion"
+                                                                    name="recomendacion" maxlength="255"
+                                                                    autocomplete="off" required=""></textarea>
+                                                            </div>
+ <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect"
+                                                            data-dismiss="modal">Cerrar</button>
+                                                        <input type="hidden" name="id_consulta" id="id_consulta"
+                                                            value="39">
+                                                        <input type="hidden" name="btn_action" id="btn_action"
+                                                            value="Add">
+                                                        <input type="submit" name="action" id="action"
+                                                            class="btn btn-primary" value="Guardar Consulta">
+                                                        <br><br>
+                                                    </div>
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+
+
+                                                </div>
+                                                <!-------------------------------------------------------------------->
+                                                <div class="tab-pane fade" id="receta"> <br>
+                                                    <div style="display: flex;">
+
+                                                        <h4> </h4>
+                                                        <h4> Agregar Receta Medica : </h4>
+                                                        <div style="padding-left: 10px">
+
+                                                            <input type="hidden" name="external_verificar"
+                                                                id="external_verificar" value="no">
+                                                            <input style="width: 80px" id="external_verificar1"
+                                                                class="btn btn-sm btn-default " type="button"
+                                                                onclick="myFunction()" value="NO">
+                                                            <script>
+                                                                function myFunction() {
+                                                                    var medico = document.getElementById("external_verificar1").value;
+                                                                    if (medico == 'NO') {
+                                                                        $("#external_verificar1").val('SI');
+                                                                        $("#external_verificar").val('si');
+                                                                        document.getElementById("medicamento").disabled = false;
+                                                                        document.getElementById("duracion").disabled = false;
+                                                                        document.getElementById("administracion").disabled = false;
+                                                                        document.getElementById("tratamiento").disabled = false;
+                                                                        document.getElementById("objetivo_tratamiento").disabled = false;
+
+                                                                        document.getElementById("medicamento").required = true;
+                                                                        document.getElementById("duracion").required = true;
+                                                                        document.getElementById("administracion").required = true;
+                                                                        document.getElementById("tratamiento").required = true;
+                                                                        document.getElementById("objetivo_tratamiento").required = true;
+
+                                                                    } else {
+                                                                        $("#external_verificar").val('no');
+                                                                        $("#external_verificar1").val('NO');
+                                                                        $("#medicamento").val('');
+                                                                        $("#duracion").val('');
+                                                                        $("#administracion").val('');
+                                                                        $("#tratamiento").val('');
+                                                                        $("#objetivo_tratamiento").val('');
+                                                                        document.getElementById("medicamento").disabled = true;
+                                                                        document.getElementById("duracion").disabled = true;
+                                                                        document.getElementById("administracion").disabled = true;
+                                                                        document.getElementById("tratamiento").disabled = true;
+                                                                        document.getElementById("objetivo_tratamiento").disabled = true;
+
+                                                                        document.getElementById("medicamento").required = false;
+                                                                        document.getElementById("duracion").required = false;
+                                                                        document.getElementById("administracion").required = false;
+                                                                        document.getElementById("tratamiento").required = false;
+                                                                        document.getElementById("objetivo_tratamiento").required = false;
+                                                                    }
+
+
+                                                                }
+
+                                                            </script>
+                                                        </div>
+                                                        <br>
+
+                                                        <span id="span_product_details"><span id="row">
+
+
+
+
+
+                                                            </span></span>
+                                                        <hr>
+
                                                     </div>
                                                     <br>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
 
-                                                    <span id="span_product_details"><span id="row">
-
-
-
-
-
-                                                        </span></span>
-                                                    <hr>
-
-                                                </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-md-4">
+                                                        </div>
 
                                                     </div>
 
-                                                </div>
+                                                    <div class="row">
 
-                                                <div class="row">
-
-                                                    <div class="col-md-6">
+                                                        <div class="col-md-6">
 
 
 
-                                                        <div class="row form-group">
-                                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                    <label for="nombre_paciente"
-                                                                        class="control-label">Medicamento
-                                                                        : </label>
-                                                                    <br>
-                                                                    <input type="text" class="form-control"
-                                                                        id="medicamento" disabled name="medicamento">
+                                                            <div class="row form-group">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="nombre_paciente"
+                                                                            class="control-label">Medicamento
+                                                                            : </label>
+                                                                        <br>
+                                                                        <input type="text" class="form-control"
+                                                                            id="medicamento" disabled
+                                                                            name="medicamento">
+
+                                                                    </div>
 
                                                                 </div>
+                                                            </div>
 
+
+
+
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="peso" class="control-label">Duracion del
+                                                                    Tratamiento :</label>
+                                                                <input type="text" class="form-control" id="duracion"
+                                                                    name="duracion" disabled
+                                                                    title="Ingrese la duracion " autocomplete="off">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <label for="edad" class="control-label">Via
+                                                                    Administracion
+                                                                    :</label>
+                                                                <input type="text" disabled class="form-control"
+                                                                    id="administracion" name="administracion">
                                                             </div>
                                                         </div>
 
 
+                                                        <div class="row">
 
-
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="peso" class="control-label">Duracion del
-                                                                Tratamiento :</label>
-                                                            <input type="text" class="form-control" id="duracion"
-                                                                name="duracion" disabled title="Ingrese la duracion "
-                                                                autocomplete="off">
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="edad" class="control-label">Via Administracion
-                                                                :</label>
-                                                            <input type="text" disabled class="form-control"
-                                                                id="administracion" name="administracion">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="motivo" class="control-label">Plan
+                                                                    Tratamiento
+                                                                    :</label>
+                                                                <textarea class="form-control" id="tratamiento"
+                                                                    name="tratamiento" disabled maxlength="255"
+                                                                    autocomplete="off" required=""></textarea>
+                                                            </div>
                                                         </div>
-                                                    </div>
-
-
-                                                    <div class="row">
-
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="motivo" class="control-label">Plan Tratamiento
-                                                                :</label>
-                                                            <textarea class="form-control" id="tratamiento"
-                                                                name="tratamiento" disabled maxlength="255"
-                                                                autocomplete="off" required=""></textarea>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="estatura" class="control-label">Objetivo del
+                                                                    Tratamiento :
+                                                                </label>
+                                                                <textarea class="form-control" id="objetivo_tratamiento"
+                                                                    name="objetivo_tratamiento" disabled maxlength="255"
+                                                                    autocomplete="off" required=""></textarea>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="estatura" class="control-label">Objetivo del
-                                                                Tratamiento :
-                                                            </label>
-                                                            <textarea class="form-control" id="objetivo_tratamiento"
-                                                                name="objetivo_tratamiento" disabled maxlength="255"
-                                                                autocomplete="off" required=""></textarea>
-                                                        </div>
+
                                                     </div>
 
+
+
+
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary waves-effect"
+                                                            data-dismiss="modal">Cerrar</button>
+                                                        <input type="hidden" name="id_consulta" id="id_consulta"
+                                                            value="39">
+                                                        <input type="hidden" name="btn_action" id="btn_action"
+                                                            value="Add">
+                                                        <input type="submit" name="action" id="action"
+                                                            class="btn btn-primary" value="Guardar Consulta">
+                                                        <br><br>
+                                                    </div>
                                                 </div>
+                                                </div></div>
+                                    </form>
 
 
 
 
+                                    <div class="box-footer clearfix">
 
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary waves-effect"
-                                                        data-dismiss="modal">Cerrar</button>
-                                                    <input type="hidden" name="id_consulta" id="id_consulta" value="39">
-                                                    <input type="hidden" name="btn_action" id="btn_action" value="Add">
-                                                    <input type="submit" name="action" id="action"
-                                                        class="btn btn-primary" value="Guardar Consulta">
-                                                    <br><br>
-                                                </div>
-
-                                                </form>
-
-                                            </div>
-
-
-                                            <div class="box-footer clearfix">
-
-                                            </div><!-- /.box-footer -->
-                                        </div><!-- /.box -->
-                                    </div><!-- /.col -->
-                                </div><!-- /.row -->
+                                    </div><!-- /.box-footer -->
+                                </div><!-- /.box -->
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
                     </section><!-- /.content -->
 
 
@@ -722,6 +740,87 @@
                     <script src="/cssI/src/Chart.js"></script>
                     <script src="/cssI/src/fastclick.js"></script>
                     <script src="/cssI//src/app.js"></script>
+
+
+                    <script src="/cssI/src/js/validator.js"></script>
+                    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+                    <script src="/cssI/src/validate.js"></script>
+                    <script src="/cssI/src/app.js"></script>
+
+                    <script>
+                        $().ready(function () {
+                            $("#formulario").validate({
+                                rules: {
+                                    personaAte: {
+                                        required: true
+                                    },
+                                    peso: {
+                                        required: true,
+                                        number: true
+                                    },
+                                    motivo: {
+                                        required: true
+                                    },
+                                    estatura: {
+                                        required: true,
+                                        number:true
+                                    },
+                                     diagnostico: {
+                                        required: true
+                                    },
+                                    recomendaicon:{
+                                        required:true
+                                    }
+                                },
+                                messages: {
+                                    personaAte: {
+                                        required: "Es necesario elegir una persona "
+                                    },
+                                    peso: {
+                                        required: "Ingrese un valor valido  "
+                                    },
+                                    motivo: {
+                                        required: "Ingrese el motivo de la consulta"
+                                    },
+                                    estatura: {
+                                        required: "Ingrese la estatura de paciente"
+                                    },
+                                    diagnostico: {
+                                        required: "No ah ingresado un diagnostico"
+                                    },
+                                    recomendacion : {
+                                        required: "Ingrese una recomendacion "
+                                    },
+                                    laboratorio : {
+                                        required: "Ingrese una examen correcto"
+                                    },
+                                    fisico : {
+                                        required: "Ingrese una examen correcto"
+                                    },
+                                    medicamento : {
+                                        required: "Ingrese un medicamento "
+                                    },
+                                    duracion : {
+                                        required: "Ingrese la duracion del tratamiento"
+                                    },
+                                    administracion : {
+                                        required: "Ingrese indicaciones "
+                                    },
+                                    tratamiento : {
+                                        required: "Ingrese indicaciones"
+                                    },
+                                    objetivo_tratamiento : {
+                                        required: "Ingrese el objetivo del tratamiento"
+                                    }
+
+                                }
+                            });
+                        });
+
+                    </script>
+
+
+
                     <script>
                         $(function () {
                             var areaChartData = {
