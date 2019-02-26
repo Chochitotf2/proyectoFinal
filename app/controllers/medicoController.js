@@ -131,7 +131,7 @@ class MedicoController {
                 if (updatedCuenta) {
 
                     req.flash('info', 'Se ha dado de baja correctamente', false);
-                    res.redirect('/admin/controlUsuarios');
+                    res.redirect('/admin/controlMedicos');
                 }
             });         }
 

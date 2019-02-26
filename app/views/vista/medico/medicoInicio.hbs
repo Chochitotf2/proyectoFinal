@@ -12,9 +12,28 @@
   <link rel="stylesheet" type="text/css" href="/cssI/src/skin-blue.css" media="screen" />
 
   <script src="/cssI/src/Chart.js"></script>
+    <script>
+
+    function notificar() {
+      const notifications = new window.notifications({
+        notificationSound: '../dist/media/notification.mp3',
+        volume: 0.2,
+        notification: {
+          autoHide: true,
+          playSound: true,
+          duration: 2000,
+          style: 'default',
+          position: 'top',
+        }
+      });
+      notifications.fire('Bienvenido medico');
+   
+    }
+
+  </script>
 </head>
 
-<body>
+<body onload="return notificar()">
   <div class="adminx-container  ">
     <!-- Header -->
     <nav class="navbar navbar-expand justify-content-between fixed-top">

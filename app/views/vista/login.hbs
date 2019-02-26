@@ -54,6 +54,27 @@
 <script src="/cssI/src/validate.js"></script>
 <script src="/cssI/src/app.js"></script>
 
+
+     <script>
+
+    function notificar() {
+      const notifications = new window.notifications({
+        notificationSound: '../dist/media/notification.mp3',
+        volume: 0.2,
+        notification: {
+          autoHide: true,
+          playSound: true,
+          duration: 2000,
+          style: 'default',
+          position: 'top',
+        }
+      });
+      notifications.fire('Bienvenido medico');
+   
+    }
+
+  </script>
+
 <script>
     $().ready(function () {
         $("#formulario").validate({
@@ -67,14 +88,16 @@
             },
             messages: {
                 correo: {
-                    required: "Ingrese un correo valido "
+                    required: "Ingresa el correo de ingreso"
                 },
                 clave: {
-                    required: "S requiere Ingresar una clave "
+                    required: "Ingresa tu clave "
                 }
             }
         });
     });
+     
+
      
 </script>
 

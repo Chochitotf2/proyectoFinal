@@ -1,14 +1,14 @@
 {
     "development":{
         "username": "root",
-        "password": "5270",
+        "password": "root",
         "database": "primera",
         "host": "localhost",
         "dialect": "mysql"
     },
     "staging":{
         "username": "root",
-        "password": "5270",
+        "password": "root",
         "database": "primera",
         "host": "localhost",
         "dialect": "mysql"

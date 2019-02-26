@@ -15,6 +15,25 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
     
+    <script>
+
+    function notificar2() {
+      const notifications = new window.notifications({
+        notificationSound: '../dist/media/notification.mp3',
+        volume: 0.2,
+        notification: {
+          autoHide: true,
+          playSound: true,
+          duration: 2000,
+          style: 'default',
+          position: 'top',
+        }
+      });
+      notifications.fire('Se ha cambiado el estado de la cuenta');
+   
+    }
+
+  </script>
 
 
 <script>
@@ -36,7 +55,7 @@
                     html += '<td>'+item.cedula +'</td>';
                     html += '<td>'+item.cuentum.correo+'</td>';
                     html += '<td>'+item.cuentum.estado+'</td>';
-                    html += '<td>'+'<a  class="btn btn-sm btn-danger "  href="/admin/darDeBajaUser/'+item.cuentum.external_id+'"> Activar/Desactivar</a></td>';
+                    html += '<td>'+'<a  onclick="notificar2()" class="btn btn-sm btn-danger "  href="/admin/darDeBajaUser/'+item.cuentum.external_id+'" > Activar/Desactivar</a></td>';
                     html += '</tr>';
                    
                 });
